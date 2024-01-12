@@ -12,7 +12,7 @@ import { useChatboxEffect } from './functions';
 import { LoadBoostrap } from './loadBootstrap';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
-import { store } from '../store';
+import { store, storeTotal } from '../store';
 
 const ProductDetails  = () => {
     
