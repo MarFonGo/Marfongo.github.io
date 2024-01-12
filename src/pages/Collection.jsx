@@ -1,5 +1,4 @@
 import { Provider} from 'react-redux';
-import {store} from 'E:/Estudio/Pagina_web/e-commerce_page/src/store';
 import Navbar from './components/Navbar'
 import Menu from './components/Menu';
 import Footer from './components/Footer';
@@ -10,6 +9,7 @@ import { useState } from 'react';
 import $ from 'jquery';
 import { useChatboxEffect } from './functions.jsx';
 import { LoadBoostrap } from './loadBootstrap.jsx';
+import { store } from '../store.js';
 
 const Collection  = () => {
     

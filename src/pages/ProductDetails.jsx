@@ -1,5 +1,4 @@
 import { Provider, useDispatch} from 'react-redux';
-import {store, storeTotal} from 'E:/Estudio/Pagina_web/e-commerce_page/src/store';
 import Navbar from './components/Navbar'
 import ProductDetail from './components/Section';
 import Menu from './components/Menu';
@@ -13,6 +12,7 @@ import { useChatboxEffect } from './functions';
 import { LoadBoostrap } from './loadBootstrap';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
+import { store } from '../store';
 
 const ProductDetails  = () => {
     

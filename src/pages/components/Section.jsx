@@ -5,9 +5,9 @@ import { Precio, Nombre } from './ui/Precio';
 import Cantidad from './ui/Cantidad';
 import Info from './ui/Info';
 import Productos from './ui/Productos';
-import { store } from 'E:/Estudio/Pagina_web/e-commerce_page/src/store';
 import { Provider, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { store } from '../../store';
 
 function ProductDetail() {
   const product = useSelector(state => state.first);
