@@ -3,6 +3,7 @@ import googleIcon from './google.png';
 import axios from 'axios';
 
 const ModalForm = ({ onClose, handleisSignIn }) => {
+  const reactApi = process.env.REACT_APP_NEST_API;
   
   const [data, setData] = useState({
     email: '',
@@ -54,7 +55,7 @@ const ModalForm = ({ onClose, handleisSignIn }) => {
 
   const handleLogin = (e) =>{
     e.preventDefault();
-    axios.post(`${REACT_APP_NEST_API}/auth/login`,data,{
+    axios.post(`${reactApi}/auth/login`,data,{
       headers: {
         'Content-Type': 'application/json'
       }}).then(response =>{
@@ -70,7 +71,7 @@ const ModalForm = ({ onClose, handleisSignIn }) => {
   
   const handleSignUp = (e) =>{
     e.preventDefault();
-    axios.post(`${REACT_APP_NEST_API}/auth/signUp`,dataSignUp,{
+    axios.post(`${reactApi}/auth/signUp`,dataSignUp,{
       headers: {
         'Content-Type': 'application/json'
       }}).then(response =>{

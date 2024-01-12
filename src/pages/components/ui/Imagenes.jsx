@@ -11,9 +11,10 @@ const Imagenes = () => {
   const product = useSelector(state => state.first);
   const [related, setRelated] = useState(null);
   const navigate = useNavigate();
+  const reactApi = process.env.REACT_APP_NEST_API;
 
   useEffect(() => {
-    fetch(`${REACT_APP_NEST_API}/products/bytag/${product.subtag}?limit=4`)
+    fetch(`${reactApi}/products/bytag/${product.subtag}?limit=4`)
     .then(data => {
         return data.json()
     }).then(data => {

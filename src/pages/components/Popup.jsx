@@ -23,10 +23,11 @@ const Popup = () => {
     const [dateIni, setDateIni] = useState(null);
     const [dateEnd, setDateEnd] = useState(null);
     const [index, setIndex] = useState(0);
+    const reactApi = process.env.REACT_APP_NEST_API;
 
     useEffect(() => {
         if(dateIni !== null && dateEnd !== null){
-            axios.get(`${REACT_APP_NEST_API}/ventas/bydate?dateInit=${dateIni}&dateEnd=${dateEnd}`,
+            axios.get(`${reactApi}/ventas/bydate?dateInit=${dateIni}&dateEnd=${dateEnd}`,
         {
             headers: {
                 'Authorization': `Bearer ${token}`
@@ -62,10 +63,10 @@ const Popup = () => {
     const dispatch = useDispatch();
 
     const createSale = () => {
-
+        
         const token= localStorage.getItem('token');
         if (productos.length > 0) {
-            axios.post(`${REACT_APP_NEST_API}/ventas`, venta, {
+            axios.post(`${reactApi}/ventas`, venta, {
                 headers: {
                     'Authorization': `Bearer ${token}`,
                     'Content-Type': 'application/json'

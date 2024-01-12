@@ -3,6 +3,7 @@ import $ from 'jquery';
 import axios from 'axios';
 
 export function useChatboxEffect() {  
+  
   useEffect(() => {
     $(document).ready(() => {
       $(".chatbox-open").click(() =>
@@ -33,9 +34,10 @@ export function useChatboxEffect() {
 }
 
 export function useSearchProducts(){
+  const reactApi = process.env.REACT_APP_NEST_API;
   const [products, setProducts] = useState(null);
   useEffect(() => {
-    axios.get(`${REACT_APP_NEST_API}/products`).then(
+    axios.get(`${reactApi}/products`).then(
       response=>{
         setProducts(response.data) 
       }
@@ -46,9 +48,10 @@ export function useSearchProducts(){
 };
 
 export function useSearchTags(){
+  const reactApi = process.env.REACT_APP_NEST_API;
   const [tags, setTags] = useState(null);
   useEffect(() => {
-    axios.get(`${REACT_APP_NEST_API}/products/tag`).then(
+    axios.get(`${reactApi}/products/tag`).then(
         response =>{
             setTags(response.data);
         }

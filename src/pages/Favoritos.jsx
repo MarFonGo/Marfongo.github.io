@@ -16,6 +16,7 @@ import axios from "axios";
 const Favoritos = () =>{
 
     const token = localStorage.getItem('token');
+    const reactApi = process.env.REACT_APP_NEST_API;
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [email, setEmail] = useState(localStorage.getItem('email'));
     const [fullName, setfullName] = useState(localStorage.getItem('fullName'));
@@ -23,7 +24,7 @@ const Favoritos = () =>{
     const [products, setProduct] = useState([]);
 
     useEffect(() => {
-        axios.get(`${REACT_APP_NEST_API}/ventas/byterm/${email}`, {
+        axios.get(`${reactApi}/ventas/byterm/${email}`, {
           headers: {
             'Authorization': `Bearer ${token}`,
           }

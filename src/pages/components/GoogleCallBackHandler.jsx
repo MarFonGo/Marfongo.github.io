@@ -8,8 +8,9 @@ const GoogleCallbackHandler = () => {
   useEffect(() => {
     const urlParams = new URLSearchParams(location.search);
     const authorizationCode = urlParams.get('code');
+    const reactApi = process.env.REACT_APP_NEST_API;
     
-    axios.post(`${REACT_APP_NEST_API}/auth/google`, { code: authorizationCode })
+    axios.post(`${reactApi}/auth/google`, { code: authorizationCode })
       .then((response) => {
         if(response.data.token){
           localStorage.setItem('token', response.data.token);

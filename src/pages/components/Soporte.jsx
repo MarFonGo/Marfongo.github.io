@@ -11,6 +11,7 @@ const Soporte = (props) =>{
     const [email, setEmail] = useState(null);
     const [info, setInfo] = useState(null);
     const { handleCloseModal } = props;
+    const reactApi = process.env.REACT_APP_NEST_API;
     
     const sendEmail = () =>{
         setInfo(document.querySelector('.message').value);
@@ -35,7 +36,7 @@ const Soporte = (props) =>{
                 info: info
             };
             const token= localStorage.getItem('token');
-            axios.post(`${REACT_APP_NEST_API}/email`, data,{
+            axios.post(`${reactApi}/email`, data,{
                 headers: {
                   'Authorization': `Bearer ${token}`,
                   'Content-Type': 'application/json'

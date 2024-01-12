@@ -20,13 +20,14 @@ const ProductDetails  = () => {
     useChatboxEffect();
     const dispatch = useDispatch();
     let params = useParams(); 
+    const reactApi = process.env.REACT_APP_NEST_API;
     const [product, setProduct] = useState(null);
     const [email, setEmail] = useState(localStorage.getItem('email'));
     const [fullName, setfullName] = useState(localStorage.getItem('fullName'));
     const [image, setImage] = useState(localStorage.getItem('image'));
 
     useEffect(() => {
-        axios.get(`${REACT_APP_NEST_API}/products/one/${params.product}`)
+        axios.get(`${reactApi}/products/one/${params.product}`)
         .then(response => {
             setProduct(response.data);
         }).catch(error => {

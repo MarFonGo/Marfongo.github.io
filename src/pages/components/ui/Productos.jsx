@@ -7,9 +7,10 @@ const Productos = () => {
     const product = useSelector(state => state.first);
     const [suggest, setSuggest] = useState(null);
     const navigate = useNavigate();
+    const reactApi = process.env.REACT_APP_NEST_API;
 
     useEffect(() => {
-        fetch(`${REACT_APP_NEST_API}/products/suggest/${product.slug}?limit=4`)
+        fetch(`${reactApi}/products/suggest/${product.slug}?limit=4`)
         .then(data => {
             return data.json()
         }).then(data => {

@@ -5,9 +5,11 @@ const Subtag= () => {
 
     const [tags, setTag] = useState([]);
     let params = useParams(); 
-    const tag = params.tag
+    const tag = params.tag;
+    const reactApi = process.env.REACT_APP_NEST_API;
+
     useEffect(() => {
-        fetch(`${REACT_APP_NEST_API}/products/tag/${tag}`)
+        fetch(`${reactApi}/products/tag/${tag}`)
         .then(data => {
             return data.json()
         }).then(data => {

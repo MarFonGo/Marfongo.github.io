@@ -5,8 +5,10 @@ const Tag= (props) => {
 
     const [tags, setTag] = useState([]);
     const {hidepopOver} = props;
+    const reactApi = process.env.REACT_APP_NEST_API;
+
     useEffect(() => {
-        fetch(`${REACT_APP_NEST_API}/products/tag`)
+        fetch(`${reactApi}/products/tag`)
         .then(data => {
             return data.json()
         }).then(data => {

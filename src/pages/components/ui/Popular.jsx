@@ -11,11 +11,16 @@ const Popular = (props) => {
   const {handleOpenCarousel} = props;
   const [isOpenCarousel, setOpenCarousel] = useState(false);
   const navigate = useNavigate(); 
-
+  const reactApi = process.env.REACT_APP_NEST_API;
   
   useEffect(() => {
-    axios.get(`${REACT_APP_NEST_API}/products/top?limit=4`)
+    axios({
+      method: 'get',
+      url: 'http://nestapi-ojzx5u51.b4a.run/products/top?limit=4',
+      'Access-Control-Allow-Origin':true
+    })
       .then((response) => {
+        console.log(response);
         setCarouselData(response.data);
         setOpenCarousel(handleOpenCarousel)
       })
@@ -37,7 +42,7 @@ const Popular = (props) => {
   const handleGoProduct = () =>{
     const item= document.querySelector('.item.active');
     if(item){
-      axios.get(`${REACT_APP_NEST_API}/products/one/${item.id}`).then(response =>{
+      axios.get(`${reactApi}/products/one/${item.id}`).then(response =>{
         const product = response.data;
         navigate(`/product_details/${product.slug}`);
 
