@@ -1,0 +1,10 @@
+.image-catalogo{
+    border-radius: 5%;
+    box-shadow: rgb(0 0 0) 0px 0px 20px;
+    width: 100%;
+    max-width: 100%;
+    &:hover{
+        cursor: pointer;
+        box-shadow: rgb(0 0 0) 0px 0px 50px;
+    }
+}

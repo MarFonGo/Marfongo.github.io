@@ -1,0 +1,13 @@
+.modal {
+  --bs-modal-bg: transparent;
+  --bs-modal-width: auto;
+}
+
+.modal-content {
+  background-color: transparent;
+  border: none;
+}
+
+.owl-stage-outer {
+  overflow: visible !important;
+}/*# sourceMappingURL=modal.css.map */

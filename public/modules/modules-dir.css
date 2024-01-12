@@ -1,0 +1,40 @@
+.image-catalogo {
+  border-radius: 5%;
+  box-shadow: rgb(0, 0, 0) 0px 0px 20px;
+  width: 100%;
+  max-width: 100%;
+}
+.image-catalogo:hover {
+  cursor: pointer;
+  box-shadow: rgb(0, 0, 0) 0px 0px 50px;
+}
+
+.my-button {
+  display: flex;
+  justify-content: center;
+  grid-column: 1/2;
+  grid-row: 4/5;
+  background: var(--primary);
+  box-shadow: inset 0.2rem 0.2rem 1rem var(--primary-light), inset -0.2rem -0.2rem 1rem var(--primary-dark), 0.3rem 0.3rem 0.6rem var(--greyLight-2), -0.2rem -0.2rem 0.5rem var(--white);
+  color: var(--greyLight-1);
+  width: 100%;
+  margin: 20px auto;
+  padding: 15px;
+}
+.my-button:hover {
+  background: #f22828;
+}
+
+.modal {
+  --bs-modal-bg: transparent;
+  --bs-modal-width: auto;
+}
+
+.modal-content {
+  background-color: transparent;
+  border: none;
+}
+
+.owl-stage-outer {
+  overflow: visible !important;
+}/*# sourceMappingURL=modules-dir.css.map */
