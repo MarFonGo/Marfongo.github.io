@@ -54,7 +54,7 @@ const ModalForm = ({ onClose, handleisSignIn }) => {
 
   const handleLogin = (e) =>{
     e.preventDefault();
-    axios.post('http://localhost:3001/auth/login',data,{
+    axios.post(`${REACT_APP_NEST_API}/auth/login`,data,{
       headers: {
         'Content-Type': 'application/json'
       }}).then(response =>{
@@ -70,7 +70,7 @@ const ModalForm = ({ onClose, handleisSignIn }) => {
   
   const handleSignUp = (e) =>{
     e.preventDefault();
-    axios.post('http://localhost:3001/auth/signUp',dataSignUp,{
+    axios.post(`${REACT_APP_NEST_API}/auth/signUp`,dataSignUp,{
       headers: {
         'Content-Type': 'application/json'
       }}).then(response =>{

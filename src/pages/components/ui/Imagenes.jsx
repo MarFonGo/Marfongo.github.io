@@ -13,7 +13,7 @@ const Imagenes = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch(`http://localhost:3001/products/bytag/${product.subtag}?limit=4`)
+    fetch(`${REACT_APP_NEST_API}/products/bytag/${product.subtag}?limit=4`)
     .then(data => {
         return data.json()
     }).then(data => {

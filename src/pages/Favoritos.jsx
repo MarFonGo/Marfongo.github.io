@@ -23,7 +23,7 @@ const Favoritos = () =>{
     const [products, setProduct] = useState([]);
 
     useEffect(() => {
-        axios.get(`http://localhost:3001/ventas/byterm/${email}`, {
+        axios.get(`${REACT_APP_NEST_API}/ventas/byterm/${email}`, {
           headers: {
             'Authorization': `Bearer ${token}`,
           }

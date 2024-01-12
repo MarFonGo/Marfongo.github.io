@@ -14,7 +14,7 @@ const Popular = (props) => {
 
   
   useEffect(() => {
-    axios.get('http://localhost:3001/products/top?limit=4')
+    axios.get(`${REACT_APP_NEST_API}/products/top?limit=4`)
       .then((response) => {
         setCarouselData(response.data);
         setOpenCarousel(handleOpenCarousel)
@@ -37,7 +37,7 @@ const Popular = (props) => {
   const handleGoProduct = () =>{
     const item= document.querySelector('.item.active');
     if(item){
-      axios.get(`http://localhost:3001/products/one/${item.id}`).then(response =>{
+      axios.get(`${REACT_APP_NEST_API}/products/one/${item.id}`).then(response =>{
         const product = response.data;
         navigate(`/product_details/${product.slug}`);
 

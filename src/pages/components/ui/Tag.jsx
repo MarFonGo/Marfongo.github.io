@@ -6,7 +6,7 @@ const Tag= (props) => {
     const [tags, setTag] = useState([]);
     const {hidepopOver} = props;
     useEffect(() => {
-        fetch(`http://localhost:3001/products/tag`)
+        fetch(`${REACT_APP_NEST_API}/products/tag`)
         .then(data => {
             return data.json()
         }).then(data => {

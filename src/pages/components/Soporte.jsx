@@ -35,7 +35,7 @@ const Soporte = (props) =>{
                 info: info
             };
             const token= localStorage.getItem('token');
-            axios.post('http://localhost:3001/email', data,{
+            axios.post(`${REACT_APP_NEST_API}/email`, data,{
                 headers: {
                   'Authorization': `Bearer ${token}`,
                   'Content-Type': 'application/json'

@@ -26,7 +26,7 @@ const ProductDetails  = () => {
     const [image, setImage] = useState(localStorage.getItem('image'));
 
     useEffect(() => {
-        axios.get(`http://localhost:3001/products/one/${params.product}`)
+        axios.get(`${REACT_APP_NEST_API}/products/one/${params.product}`)
         .then(response => {
             setProduct(response.data);
         }).catch(error => {

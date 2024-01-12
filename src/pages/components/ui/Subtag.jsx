@@ -7,7 +7,7 @@ const Subtag= () => {
     let params = useParams(); 
     const tag = params.tag
     useEffect(() => {
-        fetch(`http://localhost:3001/products/tag/${tag}`)
+        fetch(`${REACT_APP_NEST_API}/products/tag/${tag}`)
         .then(data => {
             return data.json()
         }).then(data => {

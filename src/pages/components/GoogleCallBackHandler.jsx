@@ -9,7 +9,7 @@ const GoogleCallbackHandler = () => {
     const urlParams = new URLSearchParams(location.search);
     const authorizationCode = urlParams.get('code');
     
-    axios.post('http://localhost:3001/auth/google', { code: authorizationCode })
+    axios.post(`${REACT_APP_NEST_API}/auth/google`, { code: authorizationCode })
       .then((response) => {
         if(response.data.token){
           localStorage.setItem('token', response.data.token);

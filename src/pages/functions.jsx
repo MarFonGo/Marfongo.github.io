@@ -35,7 +35,7 @@ export function useChatboxEffect() {
 export function useSearchProducts(){
   const [products, setProducts] = useState(null);
   useEffect(() => {
-    axios.get('http://localhost:3001/products').then(
+    axios.get(`${REACT_APP_NEST_API}/products`).then(
       response=>{
         setProducts(response.data) 
       }
@@ -48,7 +48,7 @@ export function useSearchProducts(){
 export function useSearchTags(){
   const [tags, setTags] = useState(null);
   useEffect(() => {
-    axios.get('http://localhost:3001/products/tag').then(
+    axios.get(`${REACT_APP_NEST_API}/products/tag`).then(
         response =>{
             setTags(response.data);
         }

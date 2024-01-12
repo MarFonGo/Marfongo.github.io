@@ -9,7 +9,7 @@ const Productos = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        fetch(`http://localhost:3001/products/suggest/${product.slug}?limit=4`)
+        fetch(`${REACT_APP_NEST_API}/products/suggest/${product.slug}?limit=4`)
         .then(data => {
             return data.json()
         }).then(data => {

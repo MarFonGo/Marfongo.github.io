@@ -26,7 +26,7 @@ const Popup = () => {
 
     useEffect(() => {
         if(dateIni !== null && dateEnd !== null){
-            axios.get(`http://localhost:3001/ventas/bydate?dateInit=${dateIni}&dateEnd=${dateEnd}`,
+            axios.get(`${REACT_APP_NEST_API}/ventas/bydate?dateInit=${dateIni}&dateEnd=${dateEnd}`,
         {
             headers: {
                 'Authorization': `Bearer ${token}`
@@ -65,7 +65,7 @@ const Popup = () => {
 
         const token= localStorage.getItem('token');
         if (productos.length > 0) {
-            axios.post('http://localhost:3001/ventas', venta, {
+            axios.post(`${REACT_APP_NEST_API}/ventas`, venta, {
                 headers: {
                     'Authorization': `Bearer ${token}`,
                     'Content-Type': 'application/json'

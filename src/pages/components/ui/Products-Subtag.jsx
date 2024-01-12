@@ -8,7 +8,7 @@ const ProductsSubtag= (props) => {
     const subtag = params.subtag;
     const {hidepopOver} = props;
     useEffect(() => {
-        fetch(`http://localhost:3001/products/bytag/${subtag}`)
+        fetch(`${REACT_APP_NEST_API}/products/bytag/${subtag}`)
         .then(data => {
             return data.json()
         }).then(data => {
