@@ -12,15 +12,11 @@ const Popular = (props) => {
   const [isOpenCarousel, setOpenCarousel] = useState(false);
   const navigate = useNavigate(); 
   const reactApi = process.env.REACT_APP_NEST_API;
+
   
   useEffect(() => {
-    axios({
-      method: 'get',
-      url: 'http://nestapi-ojzx5u51.b4a.run/products/top?limit=4',
-      'Access-Control-Allow-Origin':true
-    })
+    axios.get(`${reactApi}/products/top?limit=4`)
       .then((response) => {
-        console.log(response);
         setCarouselData(response.data);
         setOpenCarousel(handleOpenCarousel)
       })
