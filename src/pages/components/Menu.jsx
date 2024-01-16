@@ -108,7 +108,9 @@ const Menu = (props) => {
             <div className="nav-link" style={{ color: 'aliceblue', cursor: 'pointer'}}>Novedades</div>
           </li>
           <li className="nav-item">
-            <div className="nav-link" style={{ color: 'aliceblue', cursor: 'pointer'}}>Favoritos</div>
+            <Link to="/favoritos" style={{textDecoration: 'none'}}>
+              <div className="nav-link" style={{ color: 'aliceblue', cursor: 'pointer'}}>Favoritos</div>
+            </ Link>
           </li>
           <li className="nav-item">
             <div className="nav-link" style={{ color: 'aliceblue', cursor: 'pointer' }} onClick={handleOpenModal}>Soporte</div>
