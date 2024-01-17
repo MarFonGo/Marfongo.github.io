@@ -87,26 +87,26 @@ const ModalForm = ({ onClose, handleisSignIn }) => {
 
   return (
     <div className="modal-overlay">
-      <div className="modal-login fade-in" style={{left: '30%'}}>
+      <div className="modal-login fade-in">
         <button onClick={onClose} type="button" className="btn-close" aria-label="Close" style={{background: "white var(--bs-btn-close-bg) center/1em auto no-repeat"}}></button>
         <div className="tabs">
-          <h2 onClick={() => handleTabChange('login')} style={{cursor: 'pointer', margin: '0 120px',fontSize: '16px', fontFamily: 'sans-serif'}}>Log In</h2>
-          <h2 onClick={() => handleTabChange('register')} style={{cursor: 'pointer', fontSize: '16px', fontFamily: 'sans-serif'}}>Register</h2>
+          <h2 onClick={() => handleTabChange('login')} style={{cursor: 'pointer', margin: '0 120px',fontSize: 'x-large', fontFamily: 'sans-serif'}}>Log In</h2>
+          <h2 onClick={() => handleTabChange('register')} style={{cursor: 'pointer', fontSize: 'x-large', fontFamily: 'sans-serif'}}>Register</h2>
         </div>
         {showLogin ? (
           <form>
             <a className="rounded-button google-login-button" onClick={handleGoogleLogin}> 
               <span className="google-icon">
-                <img src={googleIcon} alt="google-icon" width={'30px'} height={'30px'}/>
+                <img src={googleIcon} alt="google-icon" width={'40px'} height={'40px'}/>
               </span>
-              <span >Sign in with google</span>
+              <span style={{fontSize: 'x-large'}}>Sign in with google</span>
             </a>
             <div className="login-form-group">
-              <label htmlFor="email">Email <span className="required-star">*</span></label>
+              <label htmlFor="email" style={{fontSize: 'x-large'}}>Email <span className="required-star">*</span></label>
               <input type="text" placeholder="email@website.com" id="email"  name="email" value={data.email} onChange={handleInputChange}/>
             </div>
             <div className="login-form-group">
-              <label htmlFor="pwd">Password <span className="required-star">*</span></label>
+              <label htmlFor="pwd" style={{fontSize: 'x-large'}}>Password <span className="required-star">*</span></label>
               <input autoComplete="off" type="text" placeholder="Minimum 8 characters" id="pwd" name="password" value={data.password} onChange={handleInputChange}/>
             </div>
             <a className="rounded-button login-cta" onClick={handleLogin}>Login</a>
@@ -114,16 +114,16 @@ const ModalForm = ({ onClose, handleisSignIn }) => {
         ) : (
           <form>
             <div className="login-form-group">
-              <label htmlFor="name">Name <span className="required-star">*</span></label>
-              <input autoComplete="off" type="text" placeholder="Name" id="pwdsignUp" name="fullName" value={dataSignUp.fullName} onChange={handleInputChangeSignUp}/>
+              <label htmlFor="name" style={{fontSize: 'x-large'}}>Name <span className="required-star">*</span></label>
+              <input autoComplete="off" type="text" placeholder="Name" id="nameSignUp" name="fullName" value={dataSignUp.fullName} onChange={handleInputChangeSignUp}/>
             </div>
             <div className="login-form-group">
-              <label htmlFor="email">Email <span className="required-star">*</span></label>
+              <label htmlFor="email" style={{fontSize: 'x-large'}}>Email <span className="required-star">*</span></label>
               <input type="text" placeholder="email@website.com" id="emailSignUp" name="email" value={dataSignUp.email} onChange={handleInputChangeSignUp}/>
             </div>
             <div className="login-form-group">
-              <label htmlFor="pwd">Password <span className="required-star">*</span></label>
-              <input autoComplete="off" type="text" placeholder="Minimum 8 characters" id="pwdsignUp" name="password" value={dataSignUp.password} onChange={handleInputChangeSignUp}/>
+              <label htmlFor="pwd" style={{fontSize: 'x-large'}}>Password <span className="required-star">*</span></label>
+              <input autoComplete="off" type="text" placeholder="Minimum 8 characters" id="pwdSignUp" name="password" value={dataSignUp.password} onChange={handleInputChangeSignUp}/>
             </div>
             <a className="rounded-button login-cta" onClick={handleSignUp}>Sign Up</a>
           </form>

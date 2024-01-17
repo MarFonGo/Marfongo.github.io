@@ -61,7 +61,7 @@ const Menu = (props) => {
 
 
   return (
-    <div tabIndex="-1" role="dialog" aria-modal="true" aria-labelledby="menu-title" className="Dialog__DialogBase-sc-13rdxb7-0 caScwl" style={{ maxWidth: 'fit-content', maxHeight: 'fit-content', backgroundColor: '#343a40', position: 'absolute' }}>
+    <div tabIndex="-1" role="dialog" aria-modal="true" aria-labelledby="menu-title" className="Dialog__DialogBase-sc-13rdxb7-0 caScwl" style={{ maxWidth: 'fit-content', maxHeight: 'fit-content', backgroundColor: '#343a40', position: 'absolute', minWidth:'400px'}}>
       <button aria-label="Close" className="ButtonClose__StyledButton-sc-azdk6r-0 gzJtQg" onClick={handleCloseMenu}>
         <svg aria-hidden="true" focusable="false" role="img" className="octicon octicon-x" viewBox="0 0 16 16" width="16" height="16" fill="currentColor" style={{ display: 'inline-block', userSelect: 'none', verticalAlign: 'text-bottom', overflow: 'visible', color: 'aliceblue' }}>
           <path d="M3.72 3.72a.75.75 0 0 1 1.06 0L8 6.94l3.22-3.22a.749.749 0 0 1 1.275.326.749.749 0 0 1-.215.734L9.06 8l3.22 3.22a.749.749 0 0 1-.326 1.275.749.749 0 0 1-.734-.215L8 9.06l-3.22 3.22a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042L6.94 8 3.72 4.78a.75.75 0 0 1 0-1.06Z"></path>
@@ -132,10 +132,16 @@ const Menu = (props) => {
           </li>
         </ul>
         <div className="d-flex" role="search">
-          <Provider store={storeTotal}>
-            <Select isClearable={true} options={options} className="form-control me-2 'search-input-open' : ''" 
-            placeholder="busqueda" style={{ margin: '0 0 0 auto', display: 'block', maxWidth: '200px' }} onChange={handleSelectChange}/>
-          </Provider>
+        <Provider store={storeTotal}>
+          <Select 
+            isClearable={true} 
+            options={options} 
+            className="form-control me-2 'search-input-open' : ''" 
+            placeholder="busqueda" 
+            style={{ margin: '0 0 0 auto', display: 'block', maxWidth: '300px' }} 
+            onChange={handleSelectChange}
+          />
+      </Provider>
         </div> 
       </div>
     </div>

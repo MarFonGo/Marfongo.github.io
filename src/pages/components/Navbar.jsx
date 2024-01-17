@@ -60,7 +60,7 @@ const Navbar = (props)=> {
   return (
 
     <nav className="navbar navbar-expand-xl navbar-dark bg-light" id='nav' style={{ margin: 0, display: 'flex', justifyContent: 'center', padding: 0 }}>
-      <div className="container-fluid " style={{ padding: '10px 0px', margin: '0px', backgroundColor: '#343a40' }}>
+      <div className="container-fluid " style={{ padding: '10px 0px', margin: '0px', backgroundColor: '#343a40', height:'150px' }}>
         <div className="navbar-brand" style={{ padding: '0 30px' }}>
           <img src={`${relativePath}/images/logo3.png`} alt='logo' style={{ borderRadius: '50%', cursor: 'default' }} id="logo" />
         </div>

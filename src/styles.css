@@ -18,9 +18,6 @@
     margin: 0;
     max-height: 100px;
   }
-  video {
-    max-height: 200px;
-  }
   .hide-on-small {
     display: none !important;
   }
@@ -36,6 +33,21 @@
   footer {
     height: auto !important;
   }
+}
+
+#sidebar-overlay-header{
+  .nav-item{
+    .nav-link{
+      font-size: xx-large !important;
+      margin: 20px 0 ;
+    }
+  } 
+}
+.css-1fdsijx-ValueContainer{
+  font-size: xx-large;
+}
+.css-1nmdiq5-menu{
+  font-size: xx-large;
 }
 body {
   background: antiquewhite;
@@ -264,7 +276,7 @@ video {
   cursor: pointer;
 }
 .popular-section .item.active {
-  width: 500px;
+  width: 600px !important;
   box-shadow: 12px 40px 40px rgba(0, 0, 0, 0.25);
   -webkit-box-shadow: 12px 40px 40px rgba(0, 0, 0, 0.25);
 }
@@ -284,8 +296,8 @@ video {
   position: relative;
   z-index: 1;
   overflow: hidden;
-  transform: translateY(calc(100% - 54px));
-  -webkit-transform: translateY(calc(100% - 54px));
+  transform: translateY(calc(100% - 100px));
+    -webkit-transform: translateY(calc(100% - 100px));
   transition: all 0.4s ease-in-out;
   -webkit-transition: all 0.4s ease-in-out;
 }
@@ -330,11 +342,11 @@ video {
     height: 360px;
   }
   .popular-section .item.active {
-    width: 400px;
+    width: 500px !important;
   }
   .popular-section .item-desc {
-    transform: translateY(calc(100% - 46px));
-    -webkit-transform: translateY(calc(100% - 46px));
+    transform: translateY(calc(100% - 100px));
+    -webkit-transform: translateY(calc(100% - 100px));
   }
 }
 
@@ -358,11 +370,11 @@ video {
     height: 360px;
   }
   .popular-section .item.active {
-    width: 400px;
+    width: 500px !important;
   }
   .popular-section .item-desc {
-    transform: translateY(calc(100% - 46px));
-    -webkit-transform: translateY(calc(100% - 46px));
+    transform: translateY(calc(100% - 100px));
+    -webkit-transform: translateY(calc(100% - 100px));
   }
 }
 
@@ -388,11 +400,11 @@ video {
     height: 330px;
   }
   .popular-section .item.active {
-    width: 360px;
+    width: 450px !important;
   }
   .popular-section .item-desc {
-    transform: translateY(calc(100% - 42px));
-    -webkit-transform: translateY(calc(100% - 42px));
+    transform: translateY(calc(100% - 100px));
+    -webkit-transform: translateY(calc(100% - 100px));
   }
 }
 
@@ -421,14 +433,14 @@ video {
     height: 280px;
   }
   .popular-section .item.active {
-    width: 270px;
+    width: 400px !important;
     box-shadow: 6px 10px 10px rgba(0, 0, 0, 0.25);
     -webkit-box-shadow: 6px 10px 10px rgba(0, 0, 0, 0.25);
   }
   .popular-section .item-desc {
     padding: 0 14px 5px;
-    transform: translateY(calc(100% - 42px));
-    -webkit-transform: translateY(calc(100% - 42px));
+    transform: translateY(calc(100% - 100px));
+    -webkit-transform: translateY(calc(100% - 100px));
   }
 }
 
@@ -629,7 +641,7 @@ label {
   display: none;
   bottom: 84px;
   right: 16px;
-  width: 377px;
+  width: 500px;
   height: auto;
   background-color: #fff;
   border-radius: 16px;
@@ -815,9 +827,9 @@ a.cd-signin {
 }
 
 .modal-login {
-  width: 60%;
-  height: 550px !important;
-  max-width: 600px; /* Tamaño mediano */
+  width: 80%;
+  height: 600px !important;
+  max-width: 800px; /* Tamaño mediano */
   background-color: #fff;
   padding: 20px;
   border-radius: 8px;
@@ -883,6 +895,7 @@ form {
   display: flex;
   flex-direction: column;
   margin-bottom: 20px;
+  margin: 20px;
 }
 
 .login-form-group label {
@@ -899,7 +912,7 @@ form {
   border-radius: 50px;
   font-family: auto;
   font-weight: 600;
-  font-size: 14px;
+  font-size: 20px;
   color: var(--text);
   transition: linear 0.2s;
 }
@@ -931,12 +944,12 @@ form {
   color: var(--white);
   text-decoration: none;
   border: 1px solid var(--primary-color);
-  margin: 25px 0 35px;
+  margin: 55px 0 35px;
   background: var(--primary-color);
 }
 
 .form-control{
-  max-width: 200px;
+  max-width: 300px;
 }
 
 .instagram-icon {
@@ -962,3 +975,22 @@ form {
   }
 }
 
+#pwd::placeholder{
+  font-size: large;
+}
+
+#pwdSignUp::placeholder{
+  font-size: large;
+}
+
+#email::placeholder{
+  font-size: large;
+}
+
+#emailSignUp::placeholder{
+  font-size: large;
+}
+
+#nameSignUp::placeholder{
+  font-size: large;
+}

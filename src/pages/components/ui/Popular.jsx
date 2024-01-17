@@ -53,10 +53,10 @@ const Popular = (props) => {
         { isOpenCarousel && 
           <OwlCarousel className="owl-carousel custom-carousel owl-theme" style={{ position: 'inherit' }} items={3} loop autoWidth autoplay>
             {carouselData.map((item) => (
-              <div key={item.id} id={item.id} className="item" onClick={handleItemClick} style={{ backgroundImage: `url(${item.images[0].url})` }}>
+              <div key={item.id} id={item.id} className="item" onClick={handleItemClick} style={{ backgroundImage: `url(${item.images[0].url})`, height: '500px', width: '300px' }}>
                 <div className="item-desc" >
-                  <h3 style={{ color: 'aliceblue', fontWeight: 100, fontSize: '16px' }}>{item.title}</h3>
-                  <p style={{ color: 'aliceblue', fontWeight: 100 }}>{item.info}</p>
+                  <h3 style={{ color: 'aliceblue', fontWeight: 100, fontSize: '30px', margin: '20px 0' }}>{item.title}</h3>
+                  <p style={{ color: 'aliceblue', fontWeight: 100, fontSize: '24px' }}>{item.info}</p>
                 </div>
               </div>
             ))}

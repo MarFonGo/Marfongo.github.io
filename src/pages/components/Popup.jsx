@@ -165,7 +165,7 @@ const Popup = () => {
                 {!mostrarSales && !mostrarModal && !mostrarBills && !email && <footer className="chatbox-popup__footer" style={{ backgroundColor: "white" }}>
                     <aside style={{ flex: 1, color: "#888", textAlign: "center" }}>
                     </aside>
-                    <aside style={{ flex: 10 }}>
+                    <aside style={{ flex: 10, fontSize: 'x-large'}}>
                         <textarea type="text" placeholder="Puede dejar su comentario sobre la compra..." autoFocus></textarea>
                     </aside>
                     <aside style={{ flex: 1, color: "#888", textAlign: "center" }} onClick={sendEmail}>
