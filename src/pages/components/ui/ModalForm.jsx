@@ -55,34 +55,64 @@ const ModalForm = ({ onClose, handleisSignIn }) => {
 
   const handleLogin = (e) =>{
     e.preventDefault();
-    axios.post(`${reactApi}/auth/login`,data,{
-      headers: {
-        'Content-Type': 'application/json'
-      }}).then(response =>{
-      if(response.data.token){
-        localStorage.setItem('token', response.data.token);
-        localStorage.setItem('email', response.data.user.email);
-        localStorage.setItem('fullName', response.data.user.fullName);
-        onClose();
-        handleisSignIn();
-      }
-    })
+    try {
+      axios.post(`${reactApi}/auth/login`,data,{
+        headers: {
+          'Content-Type': 'application/json'
+        }}).then(response => {
+        if (response.data.token) {
+          localStorage.setItem('token', response.data.token);
+          localStorage.setItem('email', response.data.user.email);
+          localStorage.setItem('fullName', response.data.user.fullName);
+          onClose();
+          handleisSignIn();
+        } else {
+          alert(response.data.message);
+        }
+      }).catch(error => {
+        if (error.response) {
+          alert( `Status Error: ${error.response.status}\nMessage: ${error.response.data.message}` );
+        } else if (error.request) {
+          console.log(error.request);
+        } else {
+          console.log('Error', error.message);
+        }
+      });
+    } catch (error) {
+      console.log(error);
+    }
   }
   
   const handleSignUp = (e) =>{
     e.preventDefault();
-    axios.post(`${reactApi}/auth/signUp`,dataSignUp,{
-      headers: {
-        'Content-Type': 'application/json'
-      }}).then(response =>{
-      if(response.data.token){
-        localStorage.setItem('token', response.data.token);
-        localStorage.setItem('email', response.data.user.email);
-        localStorage.setItem('fullName', response.data.user.fullName);
-        onClose();
-        handleisSignIn();
-      }
-    })
+    try {
+      axios.post(`${reactApi}/auth/signup`, dataSignUp, {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }).then(response => {
+        if (response.data.token) {
+          localStorage.setItem('token', response.data.token);
+          localStorage.setItem('email', response.data.user.email);
+          localStorage.setItem('fullName', response.data.user.fullName);
+          onClose();
+          handleisSignIn();
+        } else {
+          alert(response.data.message);
+        }
+      }).catch(error => {
+        if (error.response) {
+          alert( `Status Error: ${error.response.status}\nMessage: ${error.response.data.message}` );
+        } else if (error.request) {
+          console.log(error.request);
+        } else {
+          console.log('Error', error.message);
+        }
+      });
+    } catch (error) {
+      console.log(error);
+    }
+    
   }
 
   return (
