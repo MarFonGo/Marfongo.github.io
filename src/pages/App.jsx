@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useEffect} from 'react';
 import { BrowserRouter, Route, Routes} from 'react-router-dom';
 import Home from './Home';
 import Catalog from './Catalog';
@@ -12,7 +12,13 @@ import { storeTotal } from '../store';
 import Favoritos from './Favoritos';
 
 function App () {
-  
+  // useEffect(() => {
+  //   localStorage.removeItem('token');
+  //   localStorage.removeItem('email');
+  //   localStorage.removeItem('fullName');
+  //   localStorage.removeItem('image');
+  //   console.log('eliminar localstorage')
+  // }, []);  
   return (
     <BrowserRouter>
       <Routes>

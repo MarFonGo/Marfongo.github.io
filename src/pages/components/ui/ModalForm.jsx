@@ -137,7 +137,7 @@ const ModalForm = ({ onClose, handleisSignIn }) => {
             </div>
             <div className="login-form-group">
               <label htmlFor="pwd" style={{fontSize: 'x-large'}}>Password <span className="required-star">*</span></label>
-              <input autoComplete="off" type="text" placeholder="Minimum 8 characters" id="pwd" name="password" value={data.password} onChange={handleInputChange}/>
+              <input autoComplete="off" type="text" placeholder="Minimum 6 characters, an uppercase, a lowercase and a number" id="pwd" name="password" value={data.password} onChange={handleInputChange}/>
             </div>
             <a className="rounded-button login-cta" onClick={handleLogin}>Login</a>
           </form>
@@ -153,7 +153,7 @@ const ModalForm = ({ onClose, handleisSignIn }) => {
             </div>
             <div className="login-form-group">
               <label htmlFor="pwd" style={{fontSize: 'x-large'}}>Password <span className="required-star">*</span></label>
-              <input autoComplete="off" type="text" placeholder="Minimum 8 characters" id="pwdSignUp" name="password" value={dataSignUp.password} onChange={handleInputChangeSignUp}/>
+              <input autoComplete="off" type="text" placeholder="Minimum 6 characters, an uppercase, a lowercase and a number" id="pwdSignUp" name="password" value={dataSignUp.password} onChange={handleInputChangeSignUp}/>
             </div>
             <a className="rounded-button login-cta" onClick={handleSignUp}>Sign Up</a>
           </form>
