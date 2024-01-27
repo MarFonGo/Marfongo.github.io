@@ -6,7 +6,7 @@ const Info = () => {
     const info = item.info;
         return (
         <div id="tab-slide-1" itemProp="description"  className="slide active">
-            {info}
+            <p style={{fontSize: '20px', padding: '10px'}}>{info}</p>
         </div>
         );
 };
