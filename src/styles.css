@@ -35,6 +35,15 @@
   }
 }
 
+@media screen and (max-width: 1200px) {
+  .css-1fdsijx-ValueContainer{
+    font-size: xx-large;
+  }
+  .css-1nmdiq5-menu{
+    font-size: xx-large;
+  }
+}
+
 #sidebar-overlay-header{
   .nav-item{
     .nav-link{
@@ -43,12 +52,12 @@
     }
   } 
 }
-.css-1fdsijx-ValueContainer{
-  font-size: xx-large;
+
+.css-qbdosj-Input input{
+  min-width: 200px !important;
+  max-width: 200px !important;
 }
-.css-1nmdiq5-menu{
-  font-size: xx-large;
-}
+
 body {
   background: antiquewhite;
 }
@@ -798,12 +807,9 @@ div.catalogo {
   transform: translate3d(0px, -50px, 0px) !important;
 }
 
-.css-qbdosj-Input input{
-  min-width: 200px !important;
-  max-width: 200px !important;
-}
 #campo-texto{
   max-width: 250px;
+  min-width: 200px;
 }
 
 a.cd-signin {
