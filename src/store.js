@@ -1,21 +1,13 @@
 // store.js - Define and export the store
 import { configureStore, combineReducers } from '@reduxjs/toolkit';
+import axios from 'axios';
 
+const reactApi = process.env.REACT_APP_NEST_API;
+const initialState = await axios.get(`${reactApi}/products/top?limit=1`).then(
+  response => { return response.data}
+)
 
-const initialState = {
-  images: [{id: 100,url:'images/lomo.png'}], 
-  title: 'Lomo de cerdo', 
-  id: 'imagen3', 
-  price: 500, 
-  info: 'Exquisito lomo de calidad', 
-  slug:'lomo_de_cerdo', 
-  tag: 'comida',
-  subtag: 'carnicos', 
-  stock: 10,
-
-};
-
-function itemReducer(state1 = initialState, action) {
+function itemReducer(state1 = initialState[0], action) {
   switch (action.type) {
     case 'SET_IMAGEN':
       return {
