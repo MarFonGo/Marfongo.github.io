@@ -57,7 +57,7 @@ const Imagenes = () => {
           </div>
         </div>
       </div>
-      <div className="thumbs container-fluid" style={{ margin: 'auto'}}>
+      <div className="thumbs container-fluid" style={{ margin: 'auto', padding: '0'}}>
         {related && related.map( (producto) => ( producto.title !== product.title &&
           <a key={producto.id} className="thumb-image" onClick={() => handleClick(producto)}>
             <span><img src={producto.images[0].url} alt={producto.title} /></span>

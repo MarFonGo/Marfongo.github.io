@@ -70,13 +70,13 @@ export function handleSearchChange(tags, products, setOptions){
   let productsSubtag =[];
   if (products){
       for (product of products ){
-          productsTitle.push(product.title);
+        productsTitle.push(product.title);
       }
   }
   if (tags){
       for (tag of tags ){
           for (subtag of tag.subtag){
-              productsSubtag.push(subtag);
+            productsSubtag.push(subtag);
           }
           productsTag.push(tag.tag);
       }
