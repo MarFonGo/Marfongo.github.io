@@ -94,9 +94,9 @@ const Favoritos = () =>{
         <div id="navBar">
             <Navbar handleOpenModal={handleOpenModal} handleOpenMenu={handleOpenMenu} handleisSignIn={handleisSignIn} email={email} image={image} fullName={fullName} logOut={logOut}/>
         </div>
-        <div id="menu">
+        {menuVisible && <div id="menu">
             <Menu handleOpenModal={handleOpenModal} handleCloseMenu={handleCloseMenu} handleisSignIn={handleisSignIn} email={email} image={image} fullName={fullName} logOut={logOut}/>  
-        </div>
+        </div>}
         <div id="tag" style={{marginTop: 'auto', marginBottom: 'auto'}}>
             <ProductsFavorite products={products}/>
         </div>

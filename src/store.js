@@ -45,10 +45,22 @@ function savedImages(state3 = null, action){
 }
 export const store3 = configureStore({reducer:savedImages});
 
+function saveCredentials(state=null, action){
+  switch (action.type) {
+    case 'SET_CREDENTIALS':
+      return action.payload;
+    default:
+      return state;
+  }
+}
+
+export const storeCredentials = configureStore({reducer:saveCredentials});
+
 const rootReducer = combineReducers({
   first: itemReducer,
   second: savedImages, 
   third: Cant,
+  forth: saveCredentials
 });
 export const storeTotal = configureStore({reducer:rootReducer});
 

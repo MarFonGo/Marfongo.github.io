@@ -1,8 +1,13 @@
 import React, { useState } from 'react';
 import googleIcon from './google.png';
 import axios from 'axios';
+import { useDispatch, useSelector } from 'react-redux';
+import { handleisSignIn } from '../../functions';
 
-const ModalForm = ({ onClose, handleisSignIn }) => {
+
+const ModalForm = ({ onClose, setfullName, setEmail, setImage }) => {
+
+  const dispatch =useDispatch();
   const reactApi = process.env.REACT_APP_NEST_API;
   
   const [data, setData] = useState({
@@ -61,11 +66,18 @@ const ModalForm = ({ onClose, handleisSignIn }) => {
           'Content-Type': 'application/json'
         }}).then(response => {
         if (response.data.token) {
-          localStorage.setItem('token', response.data.token);
-          localStorage.setItem('email', response.data.user.email);
-          localStorage.setItem('fullName', response.data.user.fullName);
+          const credentials = {
+            token: response.data.token,
+            email: response.data.user.email,
+            fullName: response.data.user.fullName,
+            image: null
+          }
+          dispatch({ type: 'SET_CREDENTIALS', payload: credentials });
+          // localStorage.setItem('token', response.data.token);
+          // localStorage.setItem('email', response.data.user.email);
+          // localStorage.setItem('fullName', response.data.user.fullName);
           onClose();
-          handleisSignIn();
+          handleisSignIn(setEmail, setImage, setfullName, credentials);
         } else {
           alert(response.data.message);
         }
@@ -92,9 +104,16 @@ const ModalForm = ({ onClose, handleisSignIn }) => {
         }
       }).then(response => {
         if (response.data.token) {
-          localStorage.setItem('token', response.data.token);
-          localStorage.setItem('email', response.data.user.email);
-          localStorage.setItem('fullName', response.data.user.fullName);
+          const credentials = {
+            token: response.data.token,
+            email: response.data.user.email,
+            fullName: response.data.user.fullName,
+            image: null
+          }
+          dispatch({ type: 'SET_CREDENTIALS', payload: credentials });
+          // localStorage.setItem('token', response.data.token);
+          // localStorage.setItem('email', response.data.user.email);
+          // localStorage.setItem('fullName', response.data.user.fullName);
           onClose();
           handleisSignIn();
         } else {

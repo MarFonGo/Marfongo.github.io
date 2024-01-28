@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import $ from 'jquery';
 import axios from 'axios';
+import { useDispatch } from 'react-redux';
 
 export function useChatboxEffect() {  
   
@@ -121,3 +122,11 @@ export function changePage(selectedOption, products, tags, navigate, dispatch){
   }
 };
 
+export function handleisSignIn(setEmail, setImage, setfullName, credentials){
+  if(credentials){
+    setEmail(credentials.email);
+    setImage(credentials.image);
+    setfullName(credentials.fullName);
+  }
+  
+}

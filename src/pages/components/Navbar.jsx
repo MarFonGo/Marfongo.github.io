@@ -5,10 +5,11 @@ import Search from './ui/Search';
 import ModalForm from './ui/ModalForm';
 import { Link, useLocation } from 'react-router-dom';
 import { storeTotal } from '../../store';
-import { Provider } from 'react-redux';
+import { Provider, useDispatch, useSelector } from 'react-redux';
 import { useSearchTags } from '../functions';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
+import { useLogOut} from '../functions';
 
 const Navbar = (props)=> {  
 
@@ -21,30 +22,29 @@ const Navbar = (props)=> {
   const relativePath = Array(levelsToGoBack).fill('..').join('/');
   const { handleOpenMenu } = props;
   const { handleOpenModal } = props;
-  const {handleisSignIn} = props;
-  const {email} = props;
-  const {image} = props;
-  const {fullName} = props;
-  const {logOut} = props;
+  const [email, setEmail] = useState(null);
+  const [fullName, setfullName] = useState('');
+  const [image, setImage] = useState('');
   const tags = useSearchTags();
   const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
-    if(email && email !== undefined){
+    if(email){
       setSignin(true);
     }
     else{
       setSignin(false);
     }
-  }, [email])
+  },[email])
 
-  function handleLogOut(){
-    if(isSignin === true){
-      logOut()
-      setSignin(false);
-    }
+  const dispatch = useDispatch();
+  const LogOut = () =>{
+    dispatch({type: 'SET_CREDENTIALS', payload: null})  
+    setEmail(null); 
+    setImage(null); 
+    setfullName(null);
   }
-  
+
   function handleOpenDropDown() {
     if(isDropOpen === "none")
       setIsDropOpen("block");
@@ -56,7 +56,6 @@ const Navbar = (props)=> {
     setShowModal(!showModal);
   };
   
-
   return (
 
     <nav className="navbar navbar-expand-xl navbar-dark bg-light" id='nav' style={{ margin: 0, display: 'flex', justifyContent: 'center', padding: 0 }}>
@@ -120,14 +119,14 @@ const Navbar = (props)=> {
                   <div className='container' style={{ width: "fit-content", height: 'fit-content', position: "relative", display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
                     <img src={image ? image : `${relativePath}/images/perfil.png`} alt="Foto de perfil" style={{ width: "60px", height: "60px", borderRadius: "50%" }} />
                   </div>
-                  <button className="btn btn-outline-warning" style={{padding: '0 10px', margin: '10px 0 0 0'}} onClick={handleLogOut}>
+                  <button className="btn btn-outline-warning" style={{padding: '0 10px', margin: '10px 0 0 0'}} onClick={LogOut}>
                     <FontAwesomeIcon icon={faSignOutAlt} />
                     Logout
                   </button>
                 </div>
               }
                 
-              {showModal && <ModalForm onClose={handleModalToggle} handleisSignIn={handleisSignIn}/>}
+              {showModal && <ModalForm onClose={handleModalToggle} setEmail={setEmail} setImage={setImage} setfullName={setfullName}/>}
             </div>
         </div>
       </div>

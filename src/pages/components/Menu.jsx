@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import ModalForm from './ui/ModalForm';
-import $ from 'jquery';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { storeTotal } from '../../store';
+import { storeCredentials, storeTotal } from '../../store';
 import { Provider, useDispatch } from 'react-redux';
 import Select from 'react-select';
 import { changePage, handleSearchChange, useSearchProducts, useSearchTags } from '../functions';
@@ -24,7 +23,7 @@ const Menu = (props) => {
   const {email} = props;
   const {image} = props;
   const {fullName} = props;
-  const {logOut} = props;
+  const {useLogOut} = props;
   const [showModal, setShowModal] = useState(false);
 
   const products = useSearchProducts();
@@ -45,8 +44,8 @@ const Menu = (props) => {
       setIsDropOpen("none");
   }
 
-  function handleLogOut(){
-    logOut();   
+  function useHandleLogOut(){
+    useLogOut();   
   }
 
   const handleModalToggle = () => {
@@ -81,7 +80,7 @@ const Menu = (props) => {
             <div className='container' style={{ width: "fit-content", height: 'fit-content', position: "relative", display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
              <img src={image ? image : `${relativePath}/images/perfil.png`} alt="Foto de perfil" style={{ width: "70px", height: "70px", borderRadius: "50%" }}/>
             </div> 
-              <button className="btn btn-outline-warning" style={{padding: '0 10px', margin: '10px 0 0 0'}} onClick={handleLogOut}>
+              <button className="btn btn-outline-warning" style={{padding: '0 10px', margin: '10px 0 0 0'}} onClick={useHandleLogOut}>
                 <FontAwesomeIcon icon={faSignOutAlt} />
                 Logout
               </button>
