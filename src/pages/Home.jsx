@@ -31,11 +31,14 @@ const Home  = () => {
         $('body').toggleClass('show-form-overlay');
         $('.form-submitted').removeClass('form-submitted');
     };
-    const handleOpenMenu = () =>{
-        $("#buttonmenu").click(function() {
-            $("#menu").show();
-        });   
-    }
+    const [menuVisible, setMenuVisible] = useState(false);
+
+    const handleOpenMenu = () => {
+        setMenuVisible(true);
+    };
+    const handleCloseMenu = () => {
+        setMenuVisible(false);
+    };
     const handleOpenCarousel = () =>{
         return true;
     }
@@ -43,7 +46,7 @@ const Home  = () => {
     useChatboxEffect();
     const handleisSignIn = () =>{
         setEmail(localStorage.getItem('email'));
-        setImage(localStorage.getItem('iamge'));
+        setImage(localStorage.getItem('image'));
         setfullName(localStorage.getItem('fullName'));
     }
     const logOut = () =>{
@@ -61,9 +64,9 @@ const Home  = () => {
             <div id="navBar">
                 <Navbar handleOpenModal={handleOpenModal} handleOpenMenu={handleOpenMenu} handleisSignIn={handleisSignIn} email={email} image={image} fullName={fullName} logOut={logOut}/>
             </div>
-            <div id="menu">
-                <Menu handleOpenModal={handleOpenModal} handleisSignIn={handleisSignIn} email={email} image={image} fullName={fullName} logOut={logOut}/>  
-            </div>
+            {menuVisible && <div id="menu">
+                <Menu handleOpenModal={handleOpenModal} handleCloseMenu={handleCloseMenu} handleisSignIn={handleisSignIn} email={email} image={image} fullName={fullName} logOut={logOut}/>  
+            </div>}
             <div className="container-fluid" style={{padding: "0"}}>
                 <img src="images/anuncio.png " alt="anuncios" className="img" style={{ width: "100%", paddingLeft: "0", paddingRight: "0", margin: "0"}}></img>
             </div>

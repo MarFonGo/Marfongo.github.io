@@ -52,13 +52,7 @@ const Menu = (props) => {
   const handleModalToggle = () => {
     setShowModal(!showModal);
   };
-  const handleCloseMenu = () => {
-    $("#menu").hide();
-  };
-  useEffect(() => {
-    $("#menu").hide();
-  }, [])
-
+  const {handleCloseMenu} = props;
 
   return (
     <div tabIndex="-1" role="dialog" aria-modal="true" aria-labelledby="menu-title" className="Dialog__DialogBase-sc-13rdxb7-0 caScwl" style={{ maxWidth: 'fit-content', maxHeight: 'fit-content', backgroundColor: '#343a40', position: 'absolute', minWidth:'400px'}}>

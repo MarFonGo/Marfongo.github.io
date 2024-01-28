@@ -31,11 +31,14 @@ const Productos  = () => {
         $('body').toggleClass('show-form-overlay');
         $('.form-submitted').removeClass('form-submitted');
     };
-    const handleOpenMenu = () =>{
-        $("#buttonmenu").click(function() {
-            $("#menu").show();
-        });   
-    }
+    const [menuVisible, setMenuVisible] = useState(false);
+
+    const handleOpenMenu = () => {
+        setMenuVisible(true);
+    };
+    const handleCloseMenu = () => {
+        setMenuVisible(false);
+    };
     LoadBoostrap();
     useChatboxEffect();
     const popoverTriggerListRef = useRef(null);
@@ -60,7 +63,7 @@ const Productos  = () => {
     }
     const handleisSignIn = () =>{
         setEmail(localStorage.getItem('email'));
-        setImage(localStorage.getItem('iamge'));
+        setImage(localStorage.getItem('image'));
         setfullName(localStorage.getItem('fullName'));
     }
     const logOut = () =>{
@@ -78,9 +81,9 @@ const Productos  = () => {
             <div id="navBar">
                 <Navbar handleOpenModal={handleOpenModal} handleOpenMenu={handleOpenMenu} handleisSignIn={handleisSignIn} email={email} image={image} fullName={fullName} logOut={logOut}/>
             </div>
-            <div id="menu">
-                <Menu handleOpenModal={handleOpenModal} handleisSignIn={handleisSignIn} email={email} image={image} fullName={fullName} logOut={logOut}/>  
-            </div>
+            {menuVisible && <div id="menu">
+                <Menu handleOpenModal={handleOpenModal} handleCloseMenu={handleCloseMenu} handleisSignIn={handleisSignIn} email={email} image={image} fullName={fullName} logOut={logOut}/>  
+            </div>}
             <div id="tag" ref={popoverTriggerListRef} style={{marginTop: 'auto', marginBottom: 'auto'}}>
                 <ProductsSubtag hidepopOver={hidepopOver} setShowPopOver={setShowPopOver}/>
             </div>
