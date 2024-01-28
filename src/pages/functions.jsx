@@ -53,7 +53,7 @@ export function useSearchTags(){
   useEffect(() => {
     axios.get(`${reactApi}/products/tag`).then(
         response =>{
-            setTags(response.data);
+          setTags(response.data);
         }
     )
 }, [])

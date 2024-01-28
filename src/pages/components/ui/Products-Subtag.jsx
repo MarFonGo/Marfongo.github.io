@@ -7,6 +7,7 @@ const ProductsSubtag= (props) => {
     let params = useParams(); 
     const subtag = params.subtag;
     const {hidepopOver} = props;
+    const {setShowPopOver} = props;
     const reactApi = process.env.REACT_APP_NEST_API;
 
     useEffect(() => {
@@ -16,6 +17,7 @@ const ProductsSubtag= (props) => {
         }).then(data => {
             setProduct(data);
             setCurrentImageIndices(data.map(() => 0));
+            setShowPopOver(true);
         }).catch(error => {
             console.log(error);
         })

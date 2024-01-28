@@ -142,8 +142,8 @@ button.chatbox-open {
   position: fixed;
   top: 70%;
   right: 0;
-  width: 70px;
-  height: 70px;
+  width: 100px;
+  height: 100px;
   color: #fff;
   background-color: #0360a5;
   background-position: center center;

@@ -5,6 +5,7 @@ const Tag= (props) => {
 
     const [tags, setTag] = useState([]);
     const {hidepopOver} = props;
+    const {setShowPopOver} = props;
     const reactApi = process.env.REACT_APP_NEST_API;
 
     useEffect(() => {
@@ -14,6 +15,7 @@ const Tag= (props) => {
         }).then(data => {
             setTag(data);
             setCurrentImageIndices(data.map(() => 0));
+            setShowPopOver(true)
         }).catch(error => {
             console.log(error);
         })

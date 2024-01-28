@@ -15,7 +15,7 @@ import { store } from '../store.js';
 const Productos  = () => {
     
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const[showPopOver, setShowPopOver] = useState(null);
+    const[showPopOver, setShowPopOver] = useState(false);
     const [email, setEmail] = useState(localStorage.getItem('email'));
     const [fullName, setfullName] = useState(localStorage.getItem('fullName'));
     const [image, setImage] = useState(localStorage.getItem('image'));
@@ -41,10 +41,6 @@ const Productos  = () => {
     const popoverTriggerListRef = useRef(null);
     useEffect(() => {
         const popoverTriggerList = popoverTriggerListRef.current.querySelectorAll('[data-bs-toggle="popover"]');
-        
-        if(popoverTriggerList.length === 0){
-            setShowPopOver(showPopOver => !showPopOver)
-        }
         
         Array.from(popoverTriggerList).forEach((popoverTrigger) => {
             new Popover(popoverTrigger);
@@ -86,7 +82,7 @@ const Productos  = () => {
                 <Menu handleOpenModal={handleOpenModal} handleisSignIn={handleisSignIn} email={email} image={image} fullName={fullName} logOut={logOut}/>  
             </div>
             <div id="tag" ref={popoverTriggerListRef} style={{marginTop: 'auto', marginBottom: 'auto'}}>
-                <ProductsSubtag hidepopOver={hidepopOver}/>
+                <ProductsSubtag hidepopOver={hidepopOver} setShowPopOver={setShowPopOver}/>
             </div>
             <div id="footer" style={{marginTop:'auto'}} >
                 <Footer />
