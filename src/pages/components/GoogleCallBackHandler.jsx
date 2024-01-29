@@ -1,9 +1,11 @@
 import React, { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import axios from 'axios';
+import { useDispatch } from 'react-redux';
 
 const GoogleCallbackHandler = () => {
   const location = useLocation();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const urlParams = new URLSearchParams(location.search);
@@ -13,10 +15,13 @@ const GoogleCallbackHandler = () => {
     axios.post(`${reactApi}/auth/google`, { code: authorizationCode })
       .then((response) => {
         if(response.data.token){
-          localStorage.setItem('token', response.data.token);
-          localStorage.setItem('email', response.data.user.email);
-          localStorage.setItem('fullName', response.data.user.fullName);
-          localStorage.setItem('image', response.data.image);
+          const credentials = {
+            token: response.data.token,
+            email: response.data.user.email,
+            fullName: response.data.user.fullName,
+            image: null
+          }
+          dispatch({ type: 'SET_CREDENTIALS', payload: credentials });
           window.location.href = '/';
         }
       })

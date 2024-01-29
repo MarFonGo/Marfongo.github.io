@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import $ from 'jquery';
 import axios from 'axios';
-import { useDispatch } from 'react-redux';
 
 export function useChatboxEffect() {  
   
@@ -43,7 +42,7 @@ export function useSearchProducts(){
         setProducts(response.data) 
       }
     )
-  }, [])
+  })
 
   return products;
 };
@@ -57,7 +56,7 @@ export function useSearchTags(){
         setTags(response.data);
       }
     )
-}, [])
+})
 
   return tags;
 };

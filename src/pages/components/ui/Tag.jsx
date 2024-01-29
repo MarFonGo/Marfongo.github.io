@@ -19,7 +19,7 @@ const Tag= (props) => {
         }).catch(error => {
             console.log(error);
         })
-    }, [])
+    })
     const [currentImageIndices, setCurrentImageIndices] = useState(tags.map(() => 0));
 
     useEffect(() => {
