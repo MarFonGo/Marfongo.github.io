@@ -12,7 +12,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 const Menu = (props) => {
 
   const { handleOpenModal } = props;
-  const {handleisSignIn} =props;
   const location = useLocation();
   const pathname = location.pathname;
   const levelsToGoBack = (pathname.match(/\//g) || []).length - 1;
@@ -106,7 +105,7 @@ const Menu = (props) => {
           <li className="nav-item" onClick={handleModalToggle}>
             <div className="nav-link" style={{ color: 'aliceblue', cursor: 'pointer'}} >Sign In</div>
           </li>
-          {showModal && <ModalForm onClose={handleModalToggle} handleisSignIn={handleisSignIn}/>}
+          {showModal && <ModalForm onClose={handleModalToggle} setEmail={setEmail} setImage={setImage} setfullName={setfullName}/>}
           <li className="nav-item">
             <div className="nav-link" style={{ color: 'aliceblue', cursor: 'pointer'}}>Novedades</div>
           </li>
