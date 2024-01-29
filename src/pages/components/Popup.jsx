@@ -7,10 +7,9 @@ import DateRangePicker from './ui/DateRange';
 import Bills from './ui/Bills';
 import { Button, Row, Col, Container } from 'react-bootstrap';
 
-const Popup = () => {
+const Popup = (props) => {
 
     const location = useLocation();
-    const token= localStorage.getItem('token');
     const pathname = location.pathname;
     const levelsToGoBack = (pathname.match(/\//g) || []).length - 1;
     const relativePath = Array(levelsToGoBack).fill('..').join('/');
@@ -24,22 +23,27 @@ const Popup = () => {
     const [dateEnd, setDateEnd] = useState(null);
     const [index, setIndex] = useState(0);
     const reactApi = process.env.REACT_APP_NEST_API;
+    const {credentials} = props;
 
     useEffect(() => {
-        if(dateIni !== null && dateEnd !== null){
-            axios.get(`${reactApi}/ventas/bydate?dateInit=${dateIni}&dateEnd=${dateEnd}`,
-        {
-            headers: {
-                'Authorization': `Bearer ${token}`
+        if(credentials){
+            const token = credentials.token;
+            if(dateIni !== null && dateEnd !== null){
+                axios.get(`${reactApi}/ventas/bydate?dateInit=${dateIni}&dateEnd=${dateEnd}`,
+            {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            }).then(response =>{
+                setSales(response.data);
+                if(response.data.length === 0){
+                    setmostrarBills(false);
+                }
+            })
             }
-        }).then(response =>{
-            setSales(response.data);
-            if(response.data.length === 0){
-                setmostrarBills(false);
-            }
-        })
-    }
-    }, [dateIni, dateEnd, token])
+        }
+        
+    }, [dateIni, dateEnd, credentials])
     
     const productos = useSelector(state => state);
     let product;
@@ -64,7 +68,7 @@ const Popup = () => {
 
     const createSale = () => {
         
-        const token= localStorage.getItem('token');
+        const token= credentials.token;
         if (productos.length > 0) {
             axios.post(`${reactApi}/ventas`, venta, {
                 headers: {
@@ -141,28 +145,28 @@ const Popup = () => {
                     
                 </header>
                 <Container fluid className="chatbox-popup__main" id="List" style={{ maxHeight: "200px", overflowY: "auto" }}>
-                    {!mostrarSales && !mostrarModal && !mostrarBills && <Lista />}
+                    {!mostrarSales && !mostrarModal && sales.length === 0 && <Lista />}
                     {mostrarModal && <Bills resultado= {resultadoFetch} onClose= {() => {setMostrarModal(false); setEmail(null)}}/>}
                     {mostrarSales && memoizedChildComponent}
-                    {mostrarBills && 
+                    {mostrarBills && (sales.length > 0) &&
                     <>
                     <Bills resultado={sales[index]} onClose= {() => {setmostrarBills(false); setEmail(null)}}/>
                     <Row>
                         <Col xs={1}>
                         <Button onClick={handlePrev}>&lt;</Button>
                         </Col>
-                        <Col xs={9}></Col>
-                        <Col xs={1}>
+                        <Col xs={10}></Col>
+                        <Col xs={1} style={{display: 'contents'}}>
                         <Button onClick={handleNext}>&gt;</Button>
                         </Col>
                     </Row>
                     </>
                     }
                 </Container>
-                {!mostrarSales && !mostrarModal && !mostrarBills && <div className="container-fluid" style={{ display: "flex", justifyContent: "center" }} id="hacer_compra">
+                {!mostrarSales && !mostrarModal && sales.length === 0 && <div className="container-fluid" style={{ display: "flex", justifyContent: "center" }} id="hacer_compra">
                     <button className="btn btn-outline-success" style={{ margin: "10px", display: "flex" }} type="submit" onClick={createSale} >COMPRAR</button>
                 </div>}
-                {!mostrarSales && !mostrarModal && !mostrarBills && !email && <footer className="chatbox-popup__footer" style={{ backgroundColor: "white" }}>
+                {!mostrarSales && !mostrarModal && sales.length === 0 && !email && <footer className="chatbox-popup__footer" style={{ backgroundColor: "white" }}>
                     <aside style={{ flex: 1, color: "#888", textAlign: "center" }}>
                     </aside>
                     <aside style={{ flex: 10, fontSize: 'x-large'}}>

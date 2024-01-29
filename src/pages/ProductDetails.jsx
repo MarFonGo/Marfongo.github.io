@@ -1,4 +1,4 @@
-import { Provider, useDispatch} from 'react-redux';
+import { Provider, useDispatch, useSelector} from 'react-redux';
 import Navbar from './components/Navbar'
 import ProductDetail from './components/Section';
 import Menu from './components/Menu';
@@ -22,6 +22,7 @@ const ProductDetails  = () => {
     let params = useParams(); 
     const reactApi = process.env.REACT_APP_NEST_API;
     const [product, setProduct] = useState(null);
+    const credentials = useSelector(state => state.forth);
 
     useEffect(() => {
         axios.get(`${reactApi}/products/one/${params.product}`)
@@ -75,7 +76,7 @@ const ProductDetails  = () => {
             <button className="chatbox-open" style={{zIndex: '5'}}></button>
             <button className="chatbox-close" style={{zIndex: '5'}}></button>
                 <Provider store={store}>
-                    <Popup />
+                    <Popup credentials={credentials}/>
                 </Provider>
                 {isModalOpen && (
                     <div id="soporte">
