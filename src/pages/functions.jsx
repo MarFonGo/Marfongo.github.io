@@ -42,7 +42,7 @@ export function useSearchProducts(){
         setProducts(response.data) 
       }
     )
-  })
+  }, [])
 
   return products;
 };
@@ -56,7 +56,7 @@ export function useSearchTags(){
         setTags(response.data);
       }
     )
-})
+}, [])
 
   return tags;
 };

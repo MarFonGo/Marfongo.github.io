@@ -80,7 +80,7 @@ const Menu = (props) => {
           </Link>
         </div>
         <div className="mt-3">
-          <div style={{ width: "100px", height: "fit-content", position: "relative", display: 'flex', justifyContent: 'center', alignItems: 'center', display: 'block'}} title={`usuario: ${fullName}\nemail: ${email}`}>
+          <div style={{ width: "100px", height: "fit-content", position: "relative", justifyContent: 'center', alignItems: 'center', display: 'block'}} title={`usuario: ${fullName}\nemail: ${email}`}>
             {!credentials && <div className='container' style={{ width: "fit-content", height: 'fit-content', position: "relative", display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
              <img src={image ? image : `${relativePath}/images/logo3.png`} alt="Foto de perfil" style={{ width: "70px", height: "70px", borderRadius: "50%" }}/>
             </div>}

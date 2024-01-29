@@ -14,9 +14,6 @@ import { store } from '../store.js';
 const Collection  = () => {
     
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [email, setEmail] = useState(localStorage.getItem('email'));
-    const [fullName, setfullName] = useState(localStorage.getItem('fullName'));
-    const [image, setImage] = useState(localStorage.getItem('image'));
     
     const handleOpenModal = () => {
         setIsModalOpen(true);

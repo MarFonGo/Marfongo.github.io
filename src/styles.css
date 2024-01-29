@@ -123,7 +123,7 @@ img {
 
 div.fixed {
   position: fixed;
-  top: calc(70% + 20px);
+  top: calc(70% + 80px);
   right: 20px;
   width: -moz-fit-content;
   width: fit-content;

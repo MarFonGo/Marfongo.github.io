@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import googleIcon from './google.png';
 import axios from 'axios';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch} from 'react-redux';
 import { handleisSignIn } from '../../functions';
 
 

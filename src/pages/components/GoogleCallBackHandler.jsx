@@ -19,7 +19,7 @@ const GoogleCallbackHandler = () => {
             token: response.data.token,
             email: response.data.user.email,
             fullName: response.data.user.fullName,
-            image: null
+            image: response.data.user.picture
           }
           dispatch({ type: 'SET_CREDENTIALS', payload: credentials });
           window.location.href = '/';
