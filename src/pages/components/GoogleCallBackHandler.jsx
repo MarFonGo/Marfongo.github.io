@@ -14,13 +14,15 @@ const GoogleCallbackHandler = () => {
     
     axios.post(`${reactApi}/auth/google`, { code: authorizationCode })
       .then((response) => {
+        console.log(response)
         if(response.data.token){
           const credentials = {
             token: response.data.token,
             email: response.data.user.email,
             fullName: response.data.user.fullName,
-            image: response.data.user.picture
+            image: response.data.user.image
           }
+          console.log(credentials)
           dispatch({ type: 'SET_CREDENTIALS', payload: credentials });
           window.location.href = '/';
         }
