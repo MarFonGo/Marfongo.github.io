@@ -10,6 +10,7 @@ import '../styles.css';
 import { Provider } from 'react-redux';
 import { storeTotal } from '../store';
 import Favoritos from './Favoritos';
+import ErrorPage from './NotFound';
 
 function App () {
     
@@ -51,6 +52,7 @@ function App () {
             <Favoritos/>
           </ Provider>
         }/>
+        <Route path='/*' Component={ErrorPage}/>
       </Routes>
     </BrowserRouter>
     
