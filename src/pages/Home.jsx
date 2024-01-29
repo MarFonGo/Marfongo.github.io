@@ -14,7 +14,7 @@ import { LoadBoostrap } from './loadBootstrap';
 import { store } from '../store';
 
 const Home  = () => {
-
+    
     const [isModalOpen, setIsModalOpen] = useState(false);
     const handleOpenModal = () => {
         setIsModalOpen(true);
