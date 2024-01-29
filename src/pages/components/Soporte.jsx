@@ -4,6 +4,7 @@ import axios from 'axios';
 import lottie from 'lottie-web';
 import $ from 'jquery';
 import '../../soporte.css';
+import { useSelector } from 'react-redux';
 
 const Soporte = (props) =>{
 
@@ -12,6 +13,7 @@ const Soporte = (props) =>{
     const [info, setInfo] = useState(null);
     const { handleCloseModal } = props;
     const reactApi = process.env.REACT_APP_NEST_API;
+    const credentials = useSelector(state => state.forth)
     
     const sendEmail = () =>{
         setInfo(document.querySelector('.message').value);
@@ -35,7 +37,7 @@ const Soporte = (props) =>{
                 userEmail: email,
                 info: info
             };
-            const token= localStorage.getItem('token');
+            const token= credentials.token;
             axios.post(`${reactApi}/email`, data,{
                 headers: {
                   'Authorization': `Bearer ${token}`,

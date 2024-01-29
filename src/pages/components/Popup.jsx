@@ -145,7 +145,7 @@ const Popup = (props) => {
                     
                 </header>
                 <Container fluid className="chatbox-popup__main" id="List" style={{ maxHeight: "200px", overflowY: "auto" }}>
-                    {!mostrarSales && !mostrarModal && sales.length === 0 && <Lista />}
+                    {!mostrarSales && !mostrarModal && !mostrarBills && <Lista />}
                     {mostrarModal && <Bills resultado= {resultadoFetch} onClose= {() => {setMostrarModal(false); setEmail(null)}}/>}
                     {mostrarSales && memoizedChildComponent}
                     {mostrarBills && (sales.length > 0) &&
@@ -163,10 +163,10 @@ const Popup = (props) => {
                     </>
                     }
                 </Container>
-                {!mostrarSales && !mostrarModal && sales.length === 0 && <div className="container-fluid" style={{ display: "flex", justifyContent: "center" }} id="hacer_compra">
+                {!mostrarSales && !mostrarModal && !mostrarBills && <div className="container-fluid" style={{ display: "flex", justifyContent: "center" }} id="hacer_compra">
                     <button className="btn btn-outline-success" style={{ margin: "10px", display: "flex" }} type="submit" onClick={createSale} >COMPRAR</button>
                 </div>}
-                {!mostrarSales && !mostrarModal && sales.length === 0 && !email && <footer className="chatbox-popup__footer" style={{ backgroundColor: "white" }}>
+                {!mostrarSales && !mostrarModal && !mostrarBills && !email && <footer className="chatbox-popup__footer" style={{ backgroundColor: "white" }}>
                     <aside style={{ flex: 1, color: "#888", textAlign: "center" }}>
                     </aside>
                     <aside style={{ flex: 10, fontSize: 'x-large'}}>

@@ -1,4 +1,4 @@
-import { Provider} from 'react-redux';
+import { Provider, useSelector} from 'react-redux';
 import Navbar from './components/Navbar'
 import Menu from './components/Menu';
 import Footer from './components/Footer';
@@ -14,6 +14,7 @@ import { store } from '../store.js';
 const Collection  = () => {
     
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const credentials = useSelector(state => state.forth);
     
     const handleOpenModal = () => {
         setIsModalOpen(true);
@@ -57,7 +58,7 @@ const Collection  = () => {
             <button className="chatbox-open" style={{zIndex: '5'}}></button>
             <button className="chatbox-close" style={{zIndex: '5'}}></button>
                 <Provider store={store}>
-                    <Popup />
+                    <Popup credentials={credentials}/>
                 </Provider>
                 {isModalOpen && (
                     <div id="soporte">

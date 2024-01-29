@@ -92,7 +92,7 @@ const Favoritos = () =>{
         <button className="chatbox-open" style={{zIndex: '5'}}></button>
         <button className="chatbox-close" style={{zIndex: '5'}}></button>
             <Provider store={store}>
-                <Popup />
+                <Popup credentials={credentials}/>
             </Provider>
             {isModalOpen && (
                 <div id="soporte">
