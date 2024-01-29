@@ -41,7 +41,11 @@ function App () {
             <ProductDetails/>
           </Provider>
         } />
-        <Route path="/google-callback" Component={GoogleCallbackHandler} />
+        <Route path="/google-callback"element={
+          <Provider store={storeTotal}>
+            <GoogleCallbackHandler/>
+          </ Provider>
+        }/> 
         <Route path="/favoritos" element={
           <Provider store={storeTotal}>
             <Favoritos/>
