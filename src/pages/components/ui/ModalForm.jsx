@@ -73,11 +73,8 @@ const ModalForm = ({ onClose, setfullName, setEmail, setImage }) => {
             image: null
           }
           dispatch({ type: 'SET_CREDENTIALS', payload: credentials });
-          // localStorage.setItem('token', response.data.token);
-          // localStorage.setItem('email', response.data.user.email);
-          // localStorage.setItem('fullName', response.data.user.fullName);
-          onClose();
           handleisSignIn(setEmail, setImage, setfullName, credentials);
+          onClose();
         } else {
           alert(response.data.message);
         }

@@ -53,9 +53,9 @@ export function useSearchTags(){
   const [tags, setTags] = useState(null);
   useEffect(() => {
     axios.get(`${reactApi}/products/tag`).then(
-        response =>{
-          setTags(response.data);
-        }
+      response =>{
+        setTags(response.data);
+      }
     )
 }, [])
 

@@ -12,13 +12,7 @@ import { storeTotal } from '../store';
 import Favoritos from './Favoritos';
 
 function App () {
-  // useEffect(() => {
-  //   localStorage.removeItem('token');
-  //   localStorage.removeItem('email');
-  //   localStorage.removeItem('fullName');
-  //   localStorage.removeItem('image');
-  //   console.log('eliminar localstorage')
-  // }, []);  
+    
   return (
     <BrowserRouter>
       <Routes>

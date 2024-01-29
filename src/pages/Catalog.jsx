@@ -63,27 +63,14 @@ const Catalog  = () => {
         }, 3000);
     }
 
-    const handleisSignIn = () =>{
-        setEmail(localStorage.getItem('email'));
-        setImage(localStorage.getItem('image'));
-        setfullName(localStorage.getItem('fullName'));
-    }
-    const logOut = () =>{
-        localStorage.removeItem('token');
-        localStorage.removeItem('email');
-        localStorage.removeItem('fullName');  
-        localStorage.removeItem('image');  
-        setEmail(localStorage.getItem('email')); 
-        setImage(localStorage.getItem('image')); 
-        setfullName(localStorage.getItem('fullName'));
-    }
+    
     return (
         <div style={{display: 'flex',flexDirection: 'column',minHeight: '100vh'}}>
             <div id="navBar">
-                <Navbar handleOpenModal={handleOpenModal} handleOpenMenu={handleOpenMenu} handleisSignIn={handleisSignIn} email={email} image={image} fullName={fullName} logOut={logOut}/>
+                <Navbar handleOpenModal={handleOpenModal} handleOpenMenu={handleOpenMenu} />
             </div>
             {menuVisible && <div id="menu">
-                <Menu handleOpenModal={handleOpenModal} handleCloseMenu={handleCloseMenu} handleisSignIn={handleisSignIn} email={email} image={image} fullName={fullName} logOut={logOut}/>  
+                <Menu handleOpenModal={handleOpenModal} handleCloseMenu={handleCloseMenu} />  
             </div>}
             <div id="tag" ref={popoverTriggerListRef} style={{marginTop: 'auto', marginBottom: 'auto'}}>
                 <Tag hidepopOver={hidepopOver} setShowPopOver={setShowPopOver}/>

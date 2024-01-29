@@ -9,7 +9,6 @@ import { Provider, useDispatch, useSelector } from 'react-redux';
 import { useSearchTags } from '../functions';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
-import { useLogOut} from '../functions';
 
 const Navbar = (props)=> {  
 
@@ -22,21 +21,25 @@ const Navbar = (props)=> {
   const relativePath = Array(levelsToGoBack).fill('..').join('/');
   const { handleOpenMenu } = props;
   const { handleOpenModal } = props;
-  const [email, setEmail] = useState(null);
+  const credentials = useSelector(state => state.forth)
+  const [email, setEmail] = useState('');
   const [fullName, setfullName] = useState('');
   const [image, setImage] = useState('');
   const tags = useSearchTags();
   const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
-    if(email){
+    if(credentials){
+      setEmail(credentials.email);
+      setfullName(credentials.fullName);
+      setImage(credentials.image);
       setSignin(true);
     }
     else{
       setSignin(false);
     }
-  },[email])
-
+  },[credentials])
+  
   const dispatch = useDispatch();
   const LogOut = () =>{
     dispatch({type: 'SET_CREDENTIALS', payload: null})  

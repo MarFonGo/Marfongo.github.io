@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import ModalForm from './ui/ModalForm';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { storeCredentials, storeTotal } from '../../store';
-import { Provider, useDispatch } from 'react-redux';
+import { storeTotal } from '../../store';
+import { Provider, useDispatch, useSelector } from 'react-redux';
 import Select from 'react-select';
 import { changePage, handleSearchChange, useSearchProducts, useSearchTags } from '../functions';
 import { faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
 
 const Menu = (props) => {
 
@@ -20,11 +21,11 @@ const Menu = (props) => {
   const dispatch =useDispatch();
   const navigate = useNavigate(); 
   const [options, setOptions] = useState(null);
-  const {email} = props;
-  const {image} = props;
-  const {fullName} = props;
-  const {useLogOut} = props;
   const [showModal, setShowModal] = useState(false);
+  const credentials = useSelector(state => state.forth);
+  const [email, setEmail] = useState('');
+  const [fullName, setfullName] = useState('');
+  const [image, setImage] = useState('');
 
   const products = useSearchProducts();
   const tags = useSearchTags();
@@ -32,7 +33,13 @@ const Menu = (props) => {
     handleSearchChange(tags, products, setOptions);
   }, [tags,products])
   
-    
+  useEffect(() => {
+    if(credentials){
+      setEmail(credentials.email);
+      setfullName(credentials.fullName);
+      setImage(credentials.image);
+    }
+  },[credentials])    
   const handleSelectChange = (selectedOption) => {
     changePage(selectedOption, products, tags, navigate, dispatch);
   };
@@ -44,9 +51,12 @@ const Menu = (props) => {
       setIsDropOpen("none");
   }
 
-  function useHandleLogOut(){
-    useLogOut();   
-  }
+  const LogOut = () =>{
+    dispatch({type: 'SET_CREDENTIALS', payload: null})  
+    setEmail(null); 
+    setImage(null); 
+    setfullName(null);
+  }   
 
   const handleModalToggle = () => {
     setShowModal(!showModal);
@@ -72,15 +82,15 @@ const Menu = (props) => {
         </div>
         <div className="mt-3">
           <div style={{ width: "100px", height: "fit-content", position: "relative", display: 'flex', justifyContent: 'center', alignItems: 'center', display: 'block'}} title={`usuario: ${fullName}\nemail: ${email}`}>
-            {!email && <div className='container' style={{ width: "fit-content", height: 'fit-content', position: "relative", display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+            {!credentials && <div className='container' style={{ width: "fit-content", height: 'fit-content', position: "relative", display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
              <img src={image ? image : `${relativePath}/images/logo3.png`} alt="Foto de perfil" style={{ width: "70px", height: "70px", borderRadius: "50%" }}/>
             </div>}
-            {email &&
+            {credentials &&
             <>
             <div className='container' style={{ width: "fit-content", height: 'fit-content', position: "relative", display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
              <img src={image ? image : `${relativePath}/images/perfil.png`} alt="Foto de perfil" style={{ width: "70px", height: "70px", borderRadius: "50%" }}/>
             </div> 
-              <button className="btn btn-outline-warning" style={{padding: '0 10px', margin: '10px 0 0 0'}} onClick={useHandleLogOut}>
+              <button className="btn btn-outline-warning" style={{padding: '0 10px', margin: '10px 0 0 0'}} onClick={LogOut}>
                 <FontAwesomeIcon icon={faSignOutAlt} />
                 Logout
               </button>

@@ -74,29 +74,15 @@ const Favoritos = () =>{
     };
     LoadBoostrap();
     useChatboxEffect();
-    const handleisSignIn = () =>{
-        setEmail(localStorage.getItem('email'));
-        setImage(localStorage.getItem('image'));
-        setfullName(localStorage.getItem('fullName'));
-    }
-    const logOut = () =>{
-        localStorage.removeItem('token');
-        localStorage.removeItem('email');
-        localStorage.removeItem('fullName');  
-        localStorage.removeItem('image');  
-        setEmail(localStorage.getItem('email')); 
-        setImage(localStorage.getItem('image')); 
-        setfullName(localStorage.getItem('fullName'));
-    }
     
     return(
     <div style={{display: 'flex',flexDirection: 'column',minHeight: '100vh'}}>
         <div id="navBar">
-            <Navbar handleOpenModal={handleOpenModal} handleOpenMenu={handleOpenMenu} handleisSignIn={handleisSignIn} email={email} image={image} fullName={fullName} logOut={logOut}/>
-        </div>
-        {menuVisible && <div id="menu">
-            <Menu handleOpenModal={handleOpenModal} handleCloseMenu={handleCloseMenu} handleisSignIn={handleisSignIn} email={email} image={image} fullName={fullName} logOut={logOut}/>  
-        </div>}
+                <Navbar handleOpenModal={handleOpenModal} handleOpenMenu={handleOpenMenu} />
+            </div>
+            {menuVisible && <div id="menu">
+                <Menu handleOpenModal={handleOpenModal} handleCloseMenu={handleCloseMenu} />  
+            </div>}
         <div id="tag" style={{marginTop: 'auto', marginBottom: 'auto'}}>
             <ProductsFavorite products={products}/>
         </div>

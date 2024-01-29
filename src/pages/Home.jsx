@@ -46,9 +46,9 @@ const Home  = () => {
             <div id="navBar">
                 <Navbar handleOpenModal={handleOpenModal} handleOpenMenu={handleOpenMenu} />
             </div>
-            {/* {menuVisible && <div id="menu">
+            {menuVisible && <div id="menu">
                 <Menu handleOpenModal={handleOpenModal} handleCloseMenu={handleCloseMenu} />  
-            </div>} */}
+            </div>}
             <div className="container-fluid" style={{padding: "0"}}>
                 <img src="images/anuncio.png " alt="anuncios" className="img" style={{ width: "100%", paddingLeft: "0", paddingRight: "0", margin: "0"}}></img>
             </div>
