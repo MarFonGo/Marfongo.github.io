@@ -12,7 +12,7 @@ function bindFormClick(){
 }
 
 //Closing the form
-$('#form-close, .form-overlay').click(function(e) {
+$('#form-close, .form-overlay').on('click', function(e) {
   e.stopPropagation();
   e.preventDefault();
   toggleForm();

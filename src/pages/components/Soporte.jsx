@@ -37,26 +37,37 @@ const Soporte = (props) =>{
                 userEmail: email,
                 info: info
             };
-            const token= credentials.token;
-            axios.post(`${reactApi}/email`, data,{
-                headers: {
-                  'Authorization': `Bearer ${token}`,
-                  'Content-Type': 'application/json'
+            if(credentials){
+                const token= credentials.token;
+                const credentialsEmail = credentials.email;
+                if( credentialsEmail === email){
+                    axios.post(`${reactApi}/email`, data,{
+                        headers: {
+                          'Authorization': `Bearer ${token}`,
+                          'Content-Type': 'application/json'
+                        }
+                      })
+                      .then(response => {
+                        $('#svgContainer').css('display','block')
+                        lottie.loadAnimation({
+                        container: document.getElementById('svgContainer'), 
+                        renderer: 'svg', 
+                        loop: true, 
+                        autoplay: true, 
+                        path: 'https://dev.anthonyfessy.com/check.json'
+                        });
+                      })
+                      .catch(error => {
+                        console.error('Error al enviar la solicitud:', error);
+                    });
                 }
-              })
-              .then(response => {
-                $('#svgContainer').css('display','block')
-                lottie.loadAnimation({
-                container: document.getElementById('svgContainer'), 
-                renderer: 'svg', 
-                loop: true, 
-                autoplay: true, 
-                path: 'https://dev.anthonyfessy.com/check.json'
-                });
-              })
-              .catch(error => {
-                console.error('Error al enviar la solicitud:', error);
-              });
+                else{
+                alert("Las credenciales del formulario no coinciden con las credenciales del usuario logueado");
+                }
+            }
+            else{
+                alert("Debe iniciar sesión para enviar un mensaje");
+            }
         }
     }, [name, email, info])
     
