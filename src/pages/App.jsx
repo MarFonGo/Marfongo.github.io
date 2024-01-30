@@ -11,6 +11,7 @@ import { Provider } from 'react-redux';
 import { storeTotal } from '../store';
 import Favoritos from './Favoritos';
 import ErrorPage from './NotFound';
+import ParticlesComponent from './Particulas';
 
 function App () {
     

@@ -58,10 +58,6 @@
   max-width: 200px !important;
 }
 
-html, body {
-  height: 100%;
-  overflow: hidden;
-}
 
 body {
   background: antiquewhite;
@@ -1015,10 +1011,10 @@ form {
   font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
 }
 .error-page h1 {
-  font-size: 30vh;
+  font-size: 30vh !important;
   font-weight: bold;
   position: relative;
-  margin: -8vh 0 0;
+  margin: 8vh 0 0;
   padding: 0;
 }
 .error-page h1:after {
