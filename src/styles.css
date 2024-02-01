@@ -1039,6 +1039,7 @@ form {
   line-height: 10vh;
   max-width: 600px;
   position: relative;
+  margin: auto;
 }
 .error-page h1 + p:after {
   content: attr(data-p);

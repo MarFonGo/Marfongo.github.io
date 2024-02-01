@@ -12,6 +12,7 @@ import $ from 'jquery';
 import { useChatboxEffect} from './functions';
 import { LoadBoostrap } from './loadBootstrap';
 import { store } from '../store';
+import Notification from './components/ui/Notification';
 
 const Home  = () => {
     
@@ -72,6 +73,7 @@ const Home  = () => {
                         <Soporte handleCloseModal={handleCloseModal}/>
                     </div>
                 )}
+            <Notification/>
         </ div>
     );
 }
