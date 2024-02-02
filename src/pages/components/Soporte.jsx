@@ -5,6 +5,7 @@ import lottie from 'lottie-web';
 import $ from 'jquery';
 import '../../soporte.css';
 import { useSelector } from 'react-redux';
+import emailjs from '@emailjs/browser';
 
 const Soporte = (props) =>{
 
@@ -13,12 +14,26 @@ const Soporte = (props) =>{
     const [info, setInfo] = useState(null);
     const { handleCloseModal } = props;
     const reactApi = process.env.REACT_APP_NEST_API;
+    const EmailJSPublicKey = process.env.REACT_APP_EMAILJS_PUBLIC_KEY;
+    const EmailJSServiceId = process.env.REACT_APP_EMAILJS_SERVICE_ID;
+    const EmailJSTempalteId = process.env.REACT_APP_EMAILJS_TEMPLATE_ID; 
+
     const credentials = useSelector(state => state.forth)
     
     const sendEmail = () =>{
         setInfo(document.querySelector('.message').value);
         setEmail(document.querySelector('.email').value);
         setName(document.querySelector('.name').value);
+        const templateParams = {
+            name: 'Marlon',
+            notes: 'Se ha enviado un email'
+        };
+        emailjs.send(EmailJSServiceId,EmailJSTempalteId, templateParams, EmailJSPublicKey)
+        .then((response) => {
+        console.log('SUCCESS!', response.status, response.text);
+        }, (err) => {
+        console.log('FAILED...', err);
+        });
     };
     
     useEffect(() => {
