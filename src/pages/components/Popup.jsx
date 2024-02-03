@@ -6,6 +6,7 @@ import { useLocation } from 'react-router-dom';
 import DateRangePicker from './ui/DateRange';
 import Bills from './ui/Bills';
 import { Button, Row, Col, Container } from 'react-bootstrap';
+import emailjs from '@emailjs/browser';
 
 const Popup = (props) => {
 
@@ -24,6 +25,10 @@ const Popup = (props) => {
     const [index, setIndex] = useState(0);
     const reactApi = process.env.REACT_APP_NEST_API;
     const {credentials} = props;
+    const EmailJSPublicKey = process.env.REACT_APP_EMAILJS_PUBLIC_KEY;
+    const EmailJSServiceId = process.env.REACT_APP_EMAILJS_SERVICE_ID;
+    const EmailJSTempalteId = process.env.REACT_APP_EMAILJS_TEMPLATE_ID; 
+    const emailUser = process.env.REACT_APP_EMAIL_USER;
 
     useEffect(() => {
         if(credentials){
@@ -79,6 +84,37 @@ const Popup = (props) => {
             .then(response => {
                 setResultadofetch(response.data);
                 setMostrarModal(true);
+                console.log(credentials.email);
+                console.log(venta.emailInfo);
+
+                if(venta.emailInfo && credentials.email){
+                    const templateParams = {
+                        to_email: emailUser,
+                        from_email: credentials.email,
+                        to_name: 'Marlon',
+                        from_name: credentials.fullName,
+                        message: venta.emailInfo
+                    };
+                    const templateParams2 = {
+                        to_email: credentials.email,
+                        from_email: emailUser,
+                        to_name: credentials.fullName,
+                        from_name: 'Marlon',
+                        message: 'Gracias por dejar un comentario sobre la compra su opinion nos ayuda mucho'
+                    };
+                    emailjs.send(EmailJSServiceId,EmailJSTempalteId, templateParams, EmailJSPublicKey)
+                    .then((response) => {
+                    console.log('SUCCESS!', response.status, response.text);
+                    }, (err) => {
+                    console.log('FAILED...', err);
+                    });
+                    emailjs.send(EmailJSServiceId,EmailJSTempalteId, templateParams2, EmailJSPublicKey)
+                    .then((response) => {
+                    console.log('SUCCESS!', response.status, response.text);
+                    }, (err) => {
+                    console.log('FAILED...', err);
+                    });
+                }
             })
             .catch(error => {
                 console.log(error);

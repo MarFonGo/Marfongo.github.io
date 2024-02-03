@@ -17,23 +17,18 @@ const Soporte = (props) =>{
     const EmailJSPublicKey = process.env.REACT_APP_EMAILJS_PUBLIC_KEY;
     const EmailJSServiceId = process.env.REACT_APP_EMAILJS_SERVICE_ID;
     const EmailJSTempalteId = process.env.REACT_APP_EMAILJS_TEMPLATE_ID; 
+    const emailUser = process.env.REACT_APP_EMAIL_USER;
 
     const credentials = useSelector(state => state.forth)
     
     const sendEmail = () =>{
-        setInfo(document.querySelector('.message').value);
-        setEmail(document.querySelector('.email').value);
-        setName(document.querySelector('.name').value);
-        const templateParams = {
-            name: 'Marlon',
-            notes: 'Se ha enviado un email'
-        };
-        emailjs.send(EmailJSServiceId,EmailJSTempalteId, templateParams, EmailJSPublicKey)
-        .then((response) => {
-        console.log('SUCCESS!', response.status, response.text);
-        }, (err) => {
-        console.log('FAILED...', err);
-        });
+        const message = document.querySelector('.message').value;
+        const emailAddr = document.querySelector('.email').value;
+        const name = document.querySelector('.name').value;
+
+        setInfo(message);
+        setEmail(emailAddr);
+        setName(name);
     };
     
     useEffect(() => {
@@ -70,6 +65,32 @@ const Soporte = (props) =>{
                         loop: true, 
                         autoplay: true, 
                         path: 'https://dev.anthonyfessy.com/check.json'
+                        });
+                        const templateParams = {
+                            to_email: emailUser,
+                            from_email: email,
+                            to_name: 'Marlon',
+                            from_name: name,
+                            message: info
+                        };
+                        const templateParams2 = {
+                            to_email: email,
+                            from_email: emailUser,
+                            to_name: name,
+                            from_name: 'Marlon',
+                            message: 'Gracias por comunicarse con nosotros, enseguida lo atenderemos'
+                        };
+                        emailjs.send(EmailJSServiceId,EmailJSTempalteId, templateParams, EmailJSPublicKey)
+                        .then((response) => {
+                        console.log('SUCCESS!', response.status, response.text);
+                        }, (err) => {
+                        console.log('FAILED...', err);
+                        });
+                        emailjs.send(EmailJSServiceId,EmailJSTempalteId, templateParams2, EmailJSPublicKey)
+                        .then((response) => {
+                        console.log('SUCCESS!', response.status, response.text);
+                        }, (err) => {
+                        console.log('FAILED...', err);
                         });
                       })
                       .catch(error => {
