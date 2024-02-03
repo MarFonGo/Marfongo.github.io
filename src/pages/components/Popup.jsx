@@ -29,6 +29,7 @@ const Popup = (props) => {
     const EmailJSServiceId = process.env.REACT_APP_EMAILJS_SERVICE_ID;
     const EmailJSTempalteId = process.env.REACT_APP_EMAILJS_TEMPLATE_ID; 
     const emailUser = process.env.REACT_APP_EMAIL_USER;
+    const admin = process.env.RECAT_APP_ADMIN;
 
     useEffect(() => {
         if(credentials){
@@ -84,14 +85,12 @@ const Popup = (props) => {
             .then(response => {
                 setResultadofetch(response.data);
                 setMostrarModal(true);
-                console.log(credentials.email);
-                console.log(venta.emailInfo);
 
                 if(venta.emailInfo && credentials.email){
                     const templateParams = {
                         to_email: emailUser,
                         from_email: credentials.email,
-                        to_name: 'Marlon',
+                        to_name: admin,
                         from_name: credentials.fullName,
                         message: venta.emailInfo
                     };
@@ -99,7 +98,7 @@ const Popup = (props) => {
                         to_email: credentials.email,
                         from_email: emailUser,
                         to_name: credentials.fullName,
-                        from_name: 'Marlon',
+                        from_name: admin,
                         message: 'Gracias por dejar un comentario sobre la compra su opinion nos ayuda mucho'
                     };
                     emailjs.send(EmailJSServiceId,EmailJSTempalteId, templateParams, EmailJSPublicKey)

@@ -18,6 +18,7 @@ const Soporte = (props) =>{
     const EmailJSServiceId = process.env.REACT_APP_EMAILJS_SERVICE_ID;
     const EmailJSTempalteId = process.env.REACT_APP_EMAILJS_TEMPLATE_ID; 
     const emailUser = process.env.REACT_APP_EMAIL_USER;
+    const admin = process.env.RECAT_APP_ADMIN;
 
     const credentials = useSelector(state => state.forth)
     
@@ -50,7 +51,7 @@ const Soporte = (props) =>{
             if(credentials){
                 const token= credentials.token;
                 const credentialsEmail = credentials.email;
-                if( credentialsEmail === email){
+                if( credentialsEmail === email.trim()){
                     axios.post(`${reactApi}/email`, data,{
                         headers: {
                           'Authorization': `Bearer ${token}`,
@@ -69,7 +70,7 @@ const Soporte = (props) =>{
                         const templateParams = {
                             to_email: emailUser,
                             from_email: email,
-                            to_name: 'Marlon',
+                            to_name: admin,
                             from_name: name,
                             message: info
                         };
@@ -77,7 +78,7 @@ const Soporte = (props) =>{
                             to_email: email,
                             from_email: emailUser,
                             to_name: name,
-                            from_name: 'Marlon',
+                            from_name: admin,
                             message: 'Gracias por comunicarse con nosotros, enseguida lo atenderemos'
                         };
                         emailjs.send(EmailJSServiceId,EmailJSTempalteId, templateParams, EmailJSPublicKey)
