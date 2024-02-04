@@ -50,8 +50,10 @@ const Popup = (props) => {
             }
         }
         else{
-            alert("Para mostrar las compras anteriores debe autenticarse primero");
-            setmostrarBills(false);
+            if(mostrarBills === true){
+                alert("Para mostrar las compras anteriores debe autenticarse primero");
+                setmostrarBills(false);
+            }
         }
     }, [dateIni, dateEnd, credentials])
     

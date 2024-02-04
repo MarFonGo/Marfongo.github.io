@@ -1,9 +1,11 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import VideoPlayer from "./YoutubeAnounces";
+import { useNavigate } from "react-router-dom";
 
 const Anuncios = () =>{
 
+    const navigate = useNavigate();
     const reactApi = process.env.REACT_APP_NEST_API;
     const [anounces, setAnounce] = useState(null);
     useEffect(() => {
@@ -14,6 +16,10 @@ const Anuncios = () =>{
             console.log(error);
         })
     }, [])
+
+    const handleAnounce = (anounce) =>{
+        navigate(`/product_details/${anounce.productSlug}`)
+    }
 
     return (
     <>
@@ -35,6 +41,9 @@ const Anuncios = () =>{
                                 <h1 style={{marginBottom: "0px", padding: "20px", color: "rgba(240, 248, 255, 0.664)"}}> {anounce.title} </h1>
                                 <div className="container-fluid" style={{overflowY: 'scroll', height: '350px'}}>
                                 <h2 style={{fontSize: "28px", padding: "20px", color: "rgba(240, 248, 255, 0.664)"}}> {anounce.info}</h2>
+                                </div>
+                                <div className="container-fluid" style={{display:'flex', justifyContent:'center'}}>
+                                    <button className="btn btn-dark" onClick={() => handleAnounce(anounce)}> Ver Producto</button>
                                 </div>
                             </div>
                         </div>
