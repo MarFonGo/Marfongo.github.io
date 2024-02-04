@@ -43,12 +43,16 @@ const Popup = (props) => {
             }).then(response =>{
                 setSales(response.data);
                 if(response.data.length === 0){
+                    alert(`No hay ninguna compra en el periodo para el usuario ${credentials.fullName}`)
                     setmostrarBills(false);
                 }
             })
             }
         }
-        
+        else{
+            alert("Para mostrar las compras anteriores debe autenticarse primero");
+            setmostrarBills(false);
+        }
     }, [dateIni, dateEnd, credentials])
     
     const productos = useSelector(state => state);

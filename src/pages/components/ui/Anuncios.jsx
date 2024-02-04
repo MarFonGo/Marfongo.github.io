@@ -26,10 +26,10 @@ const Anuncios = () =>{
                   </div>
                 {anounces.map(anounce=>(
                 <>
-                    <div className="col-lg-6 col-md-12" style={{margin: "auto", display: "flex" , padding: "0px", justifyContent: "center"}}>
-                        <VideoPlayer videoId={anounce.medias[0].urlvideo}/>
+                    <div className="col-lg-12" style={{margin: "auto", display: "flex" , padding: "0px", justifyContent: "center"}}>
+                        <VideoPlayer id="videoPlayer" videoId={anounce.medias[0].urlvideo}/>
                     </div>
-                    <div className="col-lg-6 col-md-12" style={{padding: "20px", display: "block", overflow: "hidden", wordWrap: "break-word"}}>
+                    <div className="col-lg-12" style={{padding: "20px", display: "block", overflow: "hidden", wordWrap: "break-word"}}>
                         <div className="card card-style" style={{backgroundImage: `url(${anounce.medias[0].urlimage})`, backgroundRepeat: 'round', minHeight:'500px'}}>
                             <div className="card-block">
                                 <h1 style={{marginBottom: "0px", padding: "20px", color: "rgba(240, 248, 255, 0.664)"}}> {anounce.title} </h1>
