@@ -1,12 +1,11 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import Lista from './ui/Lista';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import axios from 'axios';
 import { useLocation } from 'react-router-dom';
 import DateRangePicker from './ui/DateRange';
 import Bills from './ui/Bills';
 import { Button, Row, Col, Container } from 'react-bootstrap';
-import emailjs from '@emailjs/browser';
 
 const Popup = (props) => {
 
@@ -15,8 +14,6 @@ const Popup = (props) => {
     const levelsToGoBack = (pathname.match(/\//g) || []).length - 1;
     const relativePath = Array(levelsToGoBack).fill('..').join('/');
     const [mostrarModal, setMostrarModal] = useState(false);
-    const [resultadoFetch, setResultadofetch] = useState(null);
-    const [email, setEmail] = useState(null);
     const [mostrarSales, setmostrarSales] = useState(false);
     const [mostrarBills, setmostrarBills] = useState(false);
     const [sales, setSales] = useState([]);
@@ -25,11 +22,10 @@ const Popup = (props) => {
     const [index, setIndex] = useState(0);
     const reactApi = process.env.REACT_APP_NEST_API;
     const {credentials} = props;
-    const EmailJSPublicKey = process.env.REACT_APP_EMAILJS_PUBLIC_KEY;
-    const EmailJSServiceId = process.env.REACT_APP_EMAILJS_SERVICE_ID;
-    const EmailJSTempalteId = process.env.REACT_APP_EMAILJS_TEMPLATE_ID; 
-    const emailUser = process.env.REACT_APP_EMAIL_USER;
-    const admin = process.env.RECAT_APP_ADMIN;
+    const {handleOpenModalAddress} = props;
+    const {email} = props;
+    const {setEmail} = props;
+    const {resultadoFetch} = props;
 
     useEffect(() => {
         if(credentials){
@@ -56,6 +52,12 @@ const Popup = (props) => {
             }
         }
     }, [dateIni, dateEnd, credentials])
+
+    useEffect(() => {
+        if ( resultadoFetch != null){
+            setMostrarModal(true);
+        }
+    }, [resultadoFetch])
     
     const productos = useSelector(state => state);
     let product;
@@ -76,61 +78,6 @@ const Popup = (props) => {
         products,
         emailInfo: email
     }
-    const dispatch = useDispatch();
-
-    const createSale = () => {
-        
-        const token= credentials.token;
-        if (productos.length > 0) {
-            axios.post(`${reactApi}/ventas`, venta, {
-                headers: {
-                    'Authorization': `Bearer ${token}`,
-                    'Content-Type': 'application/json'
-                }
-            })
-            .then(response => {
-                setResultadofetch(response.data);
-                setMostrarModal(true);
-
-                if(venta.emailInfo && credentials.email){
-                    const templateParams = {
-                        to_email: emailUser,
-                        from_email: credentials.email,
-                        to_name: admin,
-                        from_name: credentials.fullName,
-                        message: venta.emailInfo
-                    };
-                    const templateParams2 = {
-                        to_email: credentials.email,
-                        from_email: emailUser,
-                        to_name: credentials.fullName,
-                        from_name: admin,
-                        message: 'Gracias por dejar un comentario sobre la compra su opinion nos ayuda mucho'
-                    };
-                    emailjs.send(EmailJSServiceId,EmailJSTempalteId, templateParams, EmailJSPublicKey)
-                    .then((response) => {
-                    console.log('SUCCESS!', response.status, response.text);
-                    }, (err) => {
-                    console.log('FAILED...', err);
-                    });
-                    emailjs.send(EmailJSServiceId,EmailJSTempalteId, templateParams2, EmailJSPublicKey)
-                    .then((response) => {
-                    console.log('SUCCESS!', response.status, response.text);
-                    }, (err) => {
-                    console.log('FAILED...', err);
-                    });
-                }
-            })
-            .catch(error => {
-                console.log(error);
-            });
-        
-            for (product of products) {
-                dispatch({ type: 'QUITAR_ELEMENTO', payload: product.id });
-            }
-        }
-        
-    };
 
     const sendEmail = () =>{
         setEmail(document.querySelector('textarea').value);
@@ -205,7 +152,7 @@ const Popup = (props) => {
                     }
                 </Container>
                 {!mostrarSales && !mostrarModal && !mostrarBills && <div className="container-fluid" style={{ display: "flex", justifyContent: "center" }} id="hacer_compra">
-                    <button className="btn btn-outline-success" style={{ margin: "10px", display: "flex" }} type="submit" onClick={createSale} >COMPRAR</button>
+                    <button className="btn btn-outline-success" style={{ margin: "10px", display: "flex" }} type="submit" onClick={handleOpenModalAddress}>COMPRAR</button>
                 </div>}
                 {!mostrarSales && !mostrarModal && !mostrarBills && !email && <footer className="chatbox-popup__footer" style={{ backgroundColor: "white" }}>
                     <aside style={{ flex: 1, color: "#888", textAlign: "center" }}>

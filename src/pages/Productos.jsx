@@ -8,16 +8,21 @@ import { useEffect, useRef, useState } from 'react';
 import { Popover } from 'bootstrap';
 import Soporte from './components/Soporte.jsx';
 import $ from 'jquery';
-import { useChatboxEffect } from './functions.jsx';
+import { handleCloseModalAddress, handleOpenModalAddress, useChatboxEffect } from './functions.jsx';
 import { LoadBoostrap } from './loadBootstrap.jsx';
 import { store } from '../store.js';
+import Address from './components/ui/Addres.jsx';
 
 const Productos  = () => {
     
-    const [isModalOpen, setIsModalOpen] = useState(false);
     const[showPopOver, setShowPopOver] = useState(false);
+    const [isModalOpen, setIsModalOpen] = useState(false);
     const credentials = useSelector(state => state.forth);
-    
+    const address = useSelector(state => state.fifth);
+    const [isModalAddressOpen, setShowModalAddress] = useState(false);
+    const [email, setEmail] = useState(null);
+    const [resultadoFetch, setResultadoFetch] = useState(null);
+        
     const handleOpenModal = () => {
         setIsModalOpen(true);
     };
@@ -78,14 +83,18 @@ const Productos  = () => {
             <button className="chatbox-open" style={{zIndex: '5'}}></button>
             <button className="chatbox-close" style={{zIndex: '5'}}></button>
                 <Provider store={store}>
-                    <Popup credentials={credentials}/>
+                    <Popup credentials={credentials} setEmail={setEmail} email={email} handleOpenModalAddress={() => {handleOpenModalAddress(setShowModalAddress)}} resultadoFetch={resultadoFetch}/>
                 </Provider>
                 {isModalOpen && (
                     <div id="soporte">
                         <Soporte handleCloseModal={handleCloseModal}/>
                     </div>
-                )}
-        </div>
+                )} 
+            {isModalAddressOpen && 
+            <Provider store={store}>
+                <Address onClose={() => {handleCloseModalAddress(setShowModalAddress)}} email={email} credentials={credentials} setResultadoFetch={setResultadoFetch}/>
+            </Provider>
+            }        </div>
     );
 }
  

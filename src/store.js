@@ -10,7 +10,7 @@ const initialState = {
   "tag": "comida",
   "subtag": "carnicos",
   "images": ["lomo_de_cerdo.png"]
-}
+}//arreglarlo de forma dinamica
 
 function itemReducer(state1 = initialState, action) {
   switch (action.type) {
@@ -53,14 +53,24 @@ function saveCredentials(state=null, action){
       return state;
   }
 }
-
 export const storeCredentials = configureStore({reducer:saveCredentials});
+
+function saveAddress(state=null, action){
+  switch (action.type) {
+    case 'SET_ADDRESS':
+      return action.payload;
+    default:
+      return state;
+  }
+}
+export const storeAddress = configureStore({reducer:saveAddress});
 
 const rootReducer = combineReducers({
   first: itemReducer,
   second: savedImages, 
   third: Cant,
-  forth: saveCredentials
+  forth: saveCredentials, 
+  fifth: saveAddress
 });
 export const storeTotal = configureStore({reducer:rootReducer});
 

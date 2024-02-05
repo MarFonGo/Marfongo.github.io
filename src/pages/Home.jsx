@@ -1,4 +1,4 @@
-import { Provider,useSelector} from 'react-redux';
+import { Provider,useDispatch,useSelector} from 'react-redux';
 import Navbar from './components/Navbar'
 import Menu from './components/Menu';
 import Footer from './components/Footer';
@@ -9,15 +9,20 @@ import Popular from './components/ui/Popular';
 import { useState } from 'react';
 import Soporte from './components/Soporte';
 import $ from 'jquery';
-import { useChatboxEffect} from './functions';
+import { handleCloseModalAddress, handleOpenModalAddress, useChatboxEffect} from './functions';
 import { LoadBoostrap } from './loadBootstrap';
 import { store } from '../store';
 import Notification from './components/ui/Notification';
+import Address from './components/ui/Addres';
 
 const Home  = () => {
     
     const [isModalOpen, setIsModalOpen] = useState(false);
     const credentials = useSelector(state => state.forth);
+    const address = useSelector(state => state.fifth);
+    const [isModalAddressOpen, setShowModalAddress] = useState(false);
+    const [email, setEmail] = useState(null);
+    const [resultadoFetch, setResultadoFetch] = useState(null);
     const handleOpenModal = () => {
         setIsModalOpen(true);
     };
@@ -40,8 +45,10 @@ const Home  = () => {
     const handleOpenCarousel = () =>{
         return true;
     }
+    
     LoadBoostrap();
     useChatboxEffect();
+
 
     return (
         < div style={{display: "flex", flexDirection: "column", minHeight: "100vh"}}>
@@ -66,13 +73,18 @@ const Home  = () => {
             <button className="chatbox-open" style={{zIndex: '5'}}></button>
             <button className="chatbox-close" style={{zIndex: '5'}}></button>
                 <Provider store={store}>
-                    <Popup credentials={credentials}/>
+                    <Popup credentials={credentials} setEmail={setEmail} email={email} handleOpenModalAddress={() => {handleOpenModalAddress(setShowModalAddress)}} resultadoFetch={resultadoFetch}/>
                 </Provider>
                 {isModalOpen && (
                     <div id="soporte">
                         <Soporte handleCloseModal={handleCloseModal}/>
                     </div>
                 )}
+            {isModalAddressOpen && 
+            <Provider store={store}>
+                <Address onClose={() => {handleCloseModalAddress(setShowModalAddress)}} email={email} credentials={credentials} setResultadoFetch={setResultadoFetch}/>
+            </Provider>
+            }
             <Notification/>
         </ div>
     );

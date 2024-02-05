@@ -8,11 +8,12 @@ import Soporte from './components/Soporte';
 import { useEffect, useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import $ from 'jquery';
-import { useChatboxEffect } from './functions';
+import { handleCloseModalAddress, handleOpenModalAddress, useChatboxEffect } from './functions';
 import { LoadBoostrap } from './loadBootstrap';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import { store, storeTotal } from '../store';
+import Address from './components/ui/Addres';
 
 const ProductDetails  = () => {
     
@@ -22,7 +23,12 @@ const ProductDetails  = () => {
     let params = useParams(); 
     const reactApi = process.env.REACT_APP_NEST_API;
     const [product, setProduct] = useState(null);
+    const [isModalOpen, setIsModalOpen] = useState(false);
     const credentials = useSelector(state => state.forth);
+    const address = useSelector(state => state.fifth);
+    const [isModalAddressOpen, setShowModalAddress] = useState(false);
+    const [email, setEmail] = useState(null);
+    const [resultadoFetch, setResultadoFetch] = useState(null);
 
     useEffect(() => {
         axios.get(`${reactApi}/products/one/${params.product}`)
@@ -34,7 +40,6 @@ const ProductDetails  = () => {
     }, [params.product])
 
     dispatch({ type: 'SET_IMAGEN', payload: product });
-    const [isModalOpen, setIsModalOpen] = useState(false);
     const handleOpenModal = () => {
         setIsModalOpen(true);
     };
@@ -75,13 +80,18 @@ const ProductDetails  = () => {
             <button className="chatbox-open" style={{zIndex: '5'}}></button>
             <button className="chatbox-close" style={{zIndex: '5'}}></button>
                 <Provider store={store}>
-                    <Popup credentials={credentials}/>
+                    <Popup credentials={credentials} setEmail={setEmail} email={email} handleOpenModalAddress={() => {handleOpenModalAddress(setShowModalAddress)}} resultadoFetch={resultadoFetch}/>
                 </Provider>
                 {isModalOpen && (
                     <div id="soporte">
                         <Soporte handleCloseModal={handleCloseModal}/>
                     </div>
-                )}        
+                )} 
+            {isModalAddressOpen && 
+            <Provider store={store}>
+                <Address onClose={() => {handleCloseModalAddress(setShowModalAddress)}} email={email} credentials={credentials} setResultadoFetch={setResultadoFetch}/>
+            </Provider>
+            }
         </div>
     );
 }
