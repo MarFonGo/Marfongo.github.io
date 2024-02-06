@@ -26,6 +26,7 @@ const Popup = (props) => {
     const {email} = props;
     const {setEmail} = props;
     const {resultadoFetch} = props;
+    const productos = useSelector(state => state);
 
     useEffect(() => {
         if(credentials){
@@ -59,24 +60,10 @@ const Popup = (props) => {
         }
     }, [resultadoFetch])
     
-    const productos = useSelector(state => state);
-    let product;
-    let producto;
-    let products = [];
-    let venta;
-    let cantidad = [];
-    for (producto of productos){
-        product ={
-            slug: producto.name,
-            id: producto.id,
+    const handleComprar = () =>{
+        if(productos.length > 0){
+            handleOpenModalAddress();
         }
-        cantidad.push(producto.cantidad);
-        products.push(product);
-    }
-    venta = {
-        cantidad,
-        products,
-        emailInfo: email
     }
 
     const sendEmail = () =>{
@@ -152,7 +139,7 @@ const Popup = (props) => {
                     }
                 </Container>
                 {!mostrarSales && !mostrarModal && !mostrarBills && <div className="container-fluid" style={{ display: "flex", justifyContent: "center" }} id="hacer_compra">
-                    <button className="btn btn-outline-success" style={{ margin: "10px", display: "flex" }} type="submit" onClick={handleOpenModalAddress}>COMPRAR</button>
+                    <button className="btn btn-outline-success" style={{ margin: "10px", display: "flex" }} type="submit" onClick={handleComprar}>COMPRAR</button>
                 </div>}
                 {!mostrarSales && !mostrarModal && !mostrarBills && !email && <footer className="chatbox-popup__footer" style={{ backgroundColor: "white" }}>
                     <aside style={{ flex: 1, color: "#888", textAlign: "center" }}>

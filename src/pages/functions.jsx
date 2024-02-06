@@ -138,7 +138,7 @@ export const handleOpenModalAddress = (setShowModalAddress) => {
   setShowModalAddress(true);
 };
 
-export const createSale = (credentials, address, productos, venta, setResultadoFetch, product, products, dispatch) => {
+export const createSale = (credentials, productos, venta, setResultadoFetch, product, products, dispatch) => {
   const reactApi = process.env.REACT_APP_NEST_API;
   const EmailJSPublicKey = process.env.REACT_APP_EMAILJS_PUBLIC_KEY;
   const EmailJSServiceId = process.env.REACT_APP_EMAILJS_SERVICE_ID;

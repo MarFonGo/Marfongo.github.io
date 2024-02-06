@@ -22,11 +22,6 @@ const Address = ({onClose, email, credentials, setResultadoFetch}) => {
         cantidad.push(producto.cantidad);
         products.push(product);
     }
-    venta = {
-        cantidad,
-        products,
-        emailInfo: email
-    }
 
     const handleClick = () => {
         const label = document.querySelector('#address');
@@ -55,13 +50,15 @@ const Address = ({onClose, email, credentials, setResultadoFetch}) => {
             }, 500);
         }
         if(selectCityRef.current.value !== '' && selectStateRef.current.value !== '' && inputRef.current.value !== '' ){
-            const address = {
-                direccion: inputRef.current.value,
-                state: selectStateRef.current.value,
-                city: selectCityRef.current.value
-            }
+            const address = 'direccion: ' + selectCityRef.current.value + ', ' + selectStateRef.current.value + ', '+ inputRef.current.value  
             dispatch({ type: 'SET_ADDRESS', payload: address });
-            createSale(credentials, address, productos, venta, setResultadoFetch, product, products, dispatch)
+            venta = {
+                cantidad,
+                products,
+                emailInfo: email,
+                address
+            }
+            createSale(credentials, productos, venta, setResultadoFetch, product, products, dispatch)
             formAddress.classList.add('continue');
             setTimeout(() => {
                 onClose();
