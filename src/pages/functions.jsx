@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import $ from 'jquery';
 import axios from 'axios';
 import emailjs from '@emailjs/browser';
+import { Manager, Socket } from "socket.io-client";
 
 export function useChatboxEffect() {  
   
@@ -137,6 +138,44 @@ export const handleCloseModalAddress = (setShowModalAddress) => {
 export const handleOpenModalAddress = (setShowModalAddress) => {
   setShowModalAddress(true);
 };
+
+export const connectToServer = ( token, dispatch, setSendNotify) =>{
+  const reactApi = process.env.REACT_APP_NEST_API;
+  const manager = new Manager(
+      `${reactApi}/socket.io/socket.io.js`,{
+      extraHeaders:{
+          hola: 'mundo',
+          authentication: token
+      }
+  }); 
+  const socket = manager.socket('/');
+  addListeners( socket, dispatch, setSendNotify )
+}
+const addListeners = (socket, dispatch, setSendNotify) =>{
+
+  socket.on('connect', ()=>{
+    dispatch({ type: 'SET_CONNECTED', payload: true});
+    console.log('Conected');
+  });
+
+  socket.on('disconnect', ()=>{
+    console.log('disconected')
+  });
+
+  socket.on('clients-updated', (clients) =>{
+    console.log(clients);
+  });
+
+  socket.on('sending-notifications', (notifications) =>{
+    dispatch({ type: 'SET_NOTIFICATION', payload: notifications});
+    setSendNotify(true)
+  });
+
+  socket.on('message-from-server', (payload) =>{ 
+    console.log(payload)   
+  })
+}
+
 
 export const createSale = (credentials, productos, venta, setResultadoFetch, product, products, dispatch) => {
   const reactApi = process.env.REACT_APP_NEST_API;

@@ -65,12 +65,34 @@ function saveAddress(state=null, action){
 }
 export const storeAddress = configureStore({reducer:saveAddress});
 
+function saveNotifications(state=null, action){
+  switch (action.type) {
+    case 'SET_NOTIFICATION':
+      return action.payload;
+    default:
+      return state;
+  }
+}
+export const storeNotifications = configureStore({reducer:saveNotifications});
+
+function saveIsConnected(state=false, action){
+  switch (action.type) {
+    case 'SET_CONNECTED':
+      return action.payload;
+    default:
+      return state;
+  }
+}
+export const storeIsConnected = configureStore({reducer:saveIsConnected});
+
 const rootReducer = combineReducers({
   first: itemReducer,
   second: savedImages, 
   third: Cant,
   forth: saveCredentials, 
-  fifth: saveAddress
+  fifth: saveAddress,
+  sixth: saveNotifications,
+  seventh: saveIsConnected,
 });
 export const storeTotal = configureStore({reducer:rootReducer});
 

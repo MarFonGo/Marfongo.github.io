@@ -1,20 +1,28 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import Imagenes from './ui/Imagenes';
 import Boton from './ui/Boton';
 import { Precio, Nombre } from './ui/Precio';
 import Cantidad from './ui/Cantidad';
 import Info from './ui/Info';
 import Productos from './ui/Productos';
-import { Provider, useSelector } from 'react-redux';
+import { Provider} from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { store } from '../../store';
 
-function ProductDetail() {
-  const product = useSelector(state => state.first);
+const ProductDetail =(props)=> {
+  const {product} = props;
   const navigate = useNavigate();
   const getOtrosProductos =()=>{
     navigate(`/products/${product.tag}/${product.subtag}`);
   }
+
+  const memoizedProducts = useMemo(() => {
+    return <Productos product={product}/>
+  },[product])
+
+  const memoizedImages = useMemo(() => {
+    return <Imagenes product={product}/>
+  },[product])
   return (
     <>
     <section aria-label="Main content" role="main" className="product-detail">
@@ -25,7 +33,7 @@ function ProductDetail() {
           <div className="_cont detail-top">
             <div className="cols">
               <div className="left-col" style={{ justifyContent: 'center' }}>
-                <Imagenes />
+                {memoizedImages}
               </div>
               <div className="right-col">
                 <Nombre />
@@ -62,7 +70,7 @@ function ProductDetail() {
         <aside className="related">
           <div className="_cont">
             <h2>Podría interesarle</h2>
-              <Productos />
+              {memoizedProducts}
             <div className="more-products" id="more-products-wrap">
               <span id="more-products" data-rows_per_page="1" onClick={getOtrosProductos}>Otros productos</span>
             </div>

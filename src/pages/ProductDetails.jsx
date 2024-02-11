@@ -5,7 +5,7 @@ import Menu from './components/Menu';
 import Footer from './components/Footer';
 import Popup from './components/Popup';
 import Soporte from './components/Soporte';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import $ from 'jquery';
 import { handleCloseModalAddress, handleOpenModalAddress, useChatboxEffect } from './functions';
@@ -60,7 +60,12 @@ const ProductDetails  = () => {
     const handleCloseMenu = () => {
         setMenuVisible(false);
     };
-    
+
+    const memoizedProduct = useMemo(() =>{
+        if (product){
+            return <ProductDetail product={product}/>
+        }
+    }, [product])
     return (
         <div style={{display: 'flex',flexDirection: 'column',minHeight: '100vh'}}>
             <div id="navBar">
@@ -71,7 +76,7 @@ const ProductDetails  = () => {
             </div>}
             <div id="section" style={{marginTop: 'auto', marginBottom: 'auto'}}>
                 <Provider store={storeTotal} >
-                    <ProductDetail />
+                    {memoizedProduct}
                 </Provider>
             </div>
             <div id="footer" style={{marginTop: 'auto'}}>

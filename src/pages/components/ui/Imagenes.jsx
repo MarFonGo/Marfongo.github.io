@@ -5,10 +5,10 @@ import { faFacebook, faInstagram, faWhatsapp } from '@fortawesome/free-brands-sv
 import { useNavigate } from 'react-router-dom';
 
 
-const Imagenes = () => {
+const Imagenes = (props) => {
 
   const dispatch = useDispatch();
-  const product = useSelector(state => state.first);
+  const {product} = props;
   const [related, setRelated] = useState(null);
   const navigate = useNavigate();
   const reactApi = process.env.REACT_APP_NEST_API;

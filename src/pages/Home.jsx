@@ -6,14 +6,16 @@ import Popup from './components/Popup';
 import Anuncios from './components/ui/Anuncios';
 import Popular from './components/ui/Popular';
 // import PopularItems from './components/ui/PopularItems';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Soporte from './components/Soporte';
-import $ from 'jquery';
-import { handleCloseModalAddress, handleOpenModalAddress, useChatboxEffect} from './functions';
+import { connectToServer, handleCloseModalAddress, handleOpenModalAddress, useChatboxEffect} from './functions';
 import { LoadBoostrap } from './loadBootstrap';
 import { store } from '../store';
-import Notification from './components/ui/Notification';
 import Address from './components/ui/Addres';
+import $ from 'jquery';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import CustomNotification from './components/ui/Notification';
 
 const Home  = () => {
     
@@ -23,6 +25,53 @@ const Home  = () => {
     const [isModalAddressOpen, setShowModalAddress] = useState(false);
     const [email, setEmail] = useState(null);
     const [resultadoFetch, setResultadoFetch] = useState(null);
+    const [sendNotify, setSendNotify] = useState(false)
+
+    let token;
+    if (credentials){
+        token = credentials.token;
+      }
+      else{
+        token = '';
+    }
+    const dispatch = useDispatch();
+    useEffect(() => {
+        if(isConnected === false){
+            connectToServer(token, dispatch, setSendNotify);
+        }
+    }, [])
+    const notifications = useSelector(state => state.sixth);
+    const isConnected = useSelector(state => state.seventh);
+    const notify = () => {
+        let i = 0
+        let indexes = [];
+        if (notifications){
+            for(i=0; i<notifications.length; i++){
+                indexes.push(i)
+            }
+            indexes.map( (index) =>{
+            setTimeout(() => {
+              toast(<CustomNotification index={index} notifications={notifications}/>, {
+                position: "top-right",
+                autoClose: 30000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light"
+              });
+            }, (index + 1) * 1000);
+          })
+        } 
+    }
+    useEffect(() => {
+        if (notifications && sendNotify === true){
+            notify();
+            setSendNotify(false)
+        }     
+    }, [sendNotify])
+    
     const handleOpenModal = () => {
         setIsModalOpen(true);
     };
@@ -48,8 +97,6 @@ const Home  = () => {
     
     LoadBoostrap();
     useChatboxEffect();
-
-
     return (
         < div style={{display: "flex", flexDirection: "column", minHeight: "100vh"}}>
             <div id="navBar">
@@ -85,7 +132,8 @@ const Home  = () => {
                 <Address onClose={() => {handleCloseModalAddress(setShowModalAddress)}} email={email} credentials={credentials} setResultadoFetch={setResultadoFetch}/>
             </Provider>
             }
-            <Notification/>
+        <ToastContainer style={{width:'600px'}}/>
+            
         </ div>
     );
 }
