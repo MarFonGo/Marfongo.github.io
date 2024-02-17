@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 
 const Subtag= () => {
 
@@ -7,14 +7,21 @@ const Subtag= () => {
     let params = useParams(); 
     const tag = params.tag;
     const reactApi = process.env.REACT_APP_NEST_API;
+    const navigate = useNavigate();
 
     useEffect(() => {
         fetch(`${reactApi}/products/tag/${tag}`)
         .then(data => {
             return data.json()
         }).then(data => {
-            setTag(data);
-            setCurrentImageIndices(data.map(() => 0));
+            if(data.statusCode === 404){
+                navigate('/Not Found');
+            }
+            else{
+                setTag(data);
+                setCurrentImageIndices(data.map(() => 0));
+            }
+            
         }).catch(error => {
             console.log(error);
         })
@@ -22,15 +29,15 @@ const Subtag= () => {
     const [currentImageIndices, setCurrentImageIndices] = useState(tags.map(() => 0));
     
     useEffect(() => {
-            const intervals = tags.map((tag, index) => {
-                return setInterval(() => {
-                setCurrentImageIndices((prevIndices) => {
-                    const newIndices = [...prevIndices];
-                    newIndices[index] = (newIndices[index] + 1) % tag.images.length;
-                    return newIndices;
-                })
-            }, 5000);})
-            return () => intervals.forEach(clearInterval);
+        const intervals = tags.map((tag, index) => {
+            return setInterval(() => {
+            setCurrentImageIndices((prevIndices) => {
+                const newIndices = [...prevIndices];
+                newIndices[index] = (newIndices[index] + 1) % tag.images.length;
+                return newIndices;
+            })
+        }, 5000);})
+        return () => intervals.forEach(clearInterval);
         
     }, [tags]);
     

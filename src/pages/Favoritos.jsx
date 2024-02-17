@@ -12,6 +12,7 @@ import { useEffect, useState } from "react";
 import ProductsFavorite from "./components/ui/ProductsFavorite";
 import axios from "axios";
 import Address from "./components/ui/Addres";
+import Popular from './components/ui/Popular.jsx';
 
 const Favoritos = () =>{
 

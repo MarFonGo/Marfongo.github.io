@@ -10,7 +10,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import $ from 'jquery';
 import { handleCloseModalAddress, handleOpenModalAddress, useChatboxEffect } from './functions';
 import { LoadBoostrap } from './loadBootstrap';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { store, storeTotal } from '../store';
 import Address from './components/ui/Addres';
@@ -29,13 +29,16 @@ const ProductDetails  = () => {
     const [isModalAddressOpen, setShowModalAddress] = useState(false);
     const [email, setEmail] = useState(null);
     const [resultadoFetch, setResultadoFetch] = useState(null);
+    const navigate = useNavigate();
 
     useEffect(() => {
         axios.get(`${reactApi}/products/one/${params.product}`)
         .then(response => {
             setProduct(response.data);
         }).catch(error => {
-            console.log(error);
+            if(error.response.status === 404){
+                navigate('/Not Found');
+            }
         })
     }, [params.product])
 
@@ -79,6 +82,7 @@ const ProductDetails  = () => {
                     {memoizedProduct}
                 </Provider>
             </div>
+            
             <div id="footer" style={{marginTop: 'auto'}}>
                 <Footer />
             </div>

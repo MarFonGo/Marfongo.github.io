@@ -10,7 +10,6 @@ const Productos = (props) => {
     const reactApi = process.env.REACT_APP_NEST_API;
 
     useEffect(() => {
-        console.log("Products")
         fetch(`${reactApi}/products/suggest/${product.slug}?limit=4`)
         .then(data => {
             return data.json()

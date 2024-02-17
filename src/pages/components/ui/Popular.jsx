@@ -12,7 +12,6 @@ const Popular = (props) => {
   const [isOpenCarousel, setOpenCarousel] = useState(false);
   const navigate = useNavigate(); 
   const reactApi = process.env.REACT_APP_NEST_API;
-
   
   useEffect(() => {
     axios.get(`${reactApi}/products/top?limit=4`)
@@ -21,7 +20,7 @@ const Popular = (props) => {
         setOpenCarousel(handleOpenCarousel)
       })
       .catch((error) => {
-        console.error('Error fetching carousel data:', error);
+        alert(`Error fetching carousel data: ${error.message}`);
       });
   }, [handleOpenCarousel]);
 
@@ -41,7 +40,6 @@ const Popular = (props) => {
       axios.get(`${reactApi}/products/one/${item.id}`).then(response =>{
         const product = response.data;
         navigate(`/product_details/${product.slug}`);
-
       })
     }
     

@@ -39,11 +39,15 @@ export function useSearchProducts(){
   const reactApi = process.env.REACT_APP_NEST_API;
   const [products, setProducts] = useState(null);
   useEffect(() => {
-    axios.get(`${reactApi}/products`).then(
+    axios.get(`${reactApi}/products`)
+    .then(
       response=>{
         setProducts(response.data) 
       }
     )
+    .catch(error =>{
+      alert(error.message)
+    })
   }, [])
 
   return products;
@@ -53,11 +57,14 @@ export function useSearchTags(){
   const reactApi = process.env.REACT_APP_NEST_API;
   const [tags, setTags] = useState(null);
   useEffect(() => {
-    axios.get(`${reactApi}/products/tag`).then(
+    axios.get(`${reactApi}/products/tag`)
+    .then(
       response =>{
         setTags(response.data);
-      }
-    )
+      })
+    .catch(error =>{
+      alert(error.message)
+    })
 }, [])
 
   return tags;

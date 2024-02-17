@@ -66,7 +66,6 @@ const Catalog  = () => {
             popover.remove();
         }, 3000);
     }
-
     
     return (
         <div style={{display: 'flex',flexDirection: 'column',minHeight: '100vh'}}>

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 
 const ProductsSubtag= (props) => {
 
@@ -9,15 +9,22 @@ const ProductsSubtag= (props) => {
     const {hidepopOver} = props;
     const {setShowPopOver} = props;
     const reactApi = process.env.REACT_APP_NEST_API;
+    const navigate = useNavigate();
 
     useEffect(() => {
         fetch(`${reactApi}/products/bytag/${subtag}`)
         .then(data => {
             return data.json()
         }).then(data => {
-            setProduct(data);
-            setCurrentImageIndices(data.map(() => 0));
-            setShowPopOver(true);
+            if(data.statusCode === 404){
+                navigate('/Not Found');
+            }
+            else{
+                setProduct(data);
+                setCurrentImageIndices(data.map(() => 0));
+                setShowPopOver(true);
+            }
+            
         }).catch(error => {
             console.log(error);
         })
