@@ -13,7 +13,17 @@ const Anuncios = () =>{
         {
             setAnounce(response.data);
         }).catch(error =>{
-            alert(error.message)
+            if (error.code === "ERR_NETWORK"){
+                navigate('/Network_Error');
+            }
+            else{
+                if(error.response.status === 404){
+                    navigate('/Not Found');
+                }
+                if(error.response.status === 500){
+                    navigate('/Server_Error');
+                }
+            }
         })
     }, [])
 

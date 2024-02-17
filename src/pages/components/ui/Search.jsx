@@ -16,8 +16,8 @@ const Search =()=>{
     const [isSearchOpen, setIsSearchOpen] = useState(false);
     const [options, setOptions] = useState(null);
     
-    const products = useSearchProducts();
-    const tags = useSearchTags();
+    const products = useSearchProducts(navigate);
+    const tags = useSearchTags(navigate);
     useEffect(() => {
         handleSearchChange(tags, products, setOptions);
     }, [tags,products])

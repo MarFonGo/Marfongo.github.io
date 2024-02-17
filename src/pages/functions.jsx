@@ -35,7 +35,7 @@ export function useChatboxEffect() {
   }, []);
 }
 
-export function useSearchProducts(){
+export function useSearchProducts(navigate){
   const reactApi = process.env.REACT_APP_NEST_API;
   const [products, setProducts] = useState(null);
   useEffect(() => {
@@ -46,14 +46,21 @@ export function useSearchProducts(){
       }
     )
     .catch(error =>{
-      alert(error.message)
+      if (error.code === "ERR_NETWORK"){
+        navigate('/Network_Error');
+    }
+    else{
+      if(error.response.status === 500){
+        navigate('/Server_Error');
+      }
+    }
     })
   }, [])
 
   return products;
 };
 
-export function useSearchTags(){
+export function useSearchTags(navigate){
   const reactApi = process.env.REACT_APP_NEST_API;
   const [tags, setTags] = useState(null);
   useEffect(() => {
@@ -63,7 +70,14 @@ export function useSearchTags(){
         setTags(response.data);
       })
     .catch(error =>{
-      alert(error.message)
+      if (error.code === "ERR_NETWORK"){
+        navigate('/Network_Error');
+    }
+    else{
+      if(error.response.status === 500){
+        navigate('/Server_Error');
+      }
+    }
     })
 }, [])
 

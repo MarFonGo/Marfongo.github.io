@@ -3,7 +3,7 @@ import '../../styles.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Search from './ui/Search';
 import ModalForm from './ui/ModalForm';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { storeTotal } from '../../store';
 import { Provider, useDispatch, useSelector } from 'react-redux';
 import { useSearchTags } from '../functions';
@@ -25,7 +25,8 @@ const Navbar = (props)=> {
   const [email, setEmail] = useState('');
   const [fullName, setfullName] = useState('');
   const [image, setImage] = useState('');
-  const tags = useSearchTags();
+  const navigate = useNavigate();
+  const tags = useSearchTags(navigate);
   const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {

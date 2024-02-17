@@ -26,8 +26,8 @@ const Menu = (props) => {
   const [fullName, setfullName] = useState('');
   const [image, setImage] = useState('');
 
-  const products = useSearchProducts();
-  const tags = useSearchTags();
+  const products = useSearchProducts(navigate);
+  const tags = useSearchTags(navigate);
   useEffect(() => {
     handleSearchChange(tags, products, setOptions);
   }, [tags,products])

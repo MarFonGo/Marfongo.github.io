@@ -36,8 +36,16 @@ const ProductDetails  = () => {
         .then(response => {
             setProduct(response.data);
         }).catch(error => {
-            if(error.response.status === 404){
-                navigate('/Not Found');
+            if (error.code === "ERR_NETWORK"){
+                navigate('/Network_Error');
+            }
+            else{
+                if(error.response.status === 404){
+                    navigate('/Not Found');
+                }
+                if(error.response.status === 500){
+                    navigate('/Server_Error');
+                }
             }
         })
     }, [params.product])
